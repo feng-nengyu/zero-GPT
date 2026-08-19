@@ -1,0 +1,17 @@
+[project]
+name = "zero-gpt"
+version = "0.1.0"
+description = "Lecture 1: build scalar autograd and a tiny MLP from scratch"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "graphviz",
+    "ipykernel",
+    "jupyterlab",
+    "matplotlib",
+    "numpy",
+    "torch",
+]
+
+[tool.uv]
+package = false
