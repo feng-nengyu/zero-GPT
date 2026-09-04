@@ -1,8 +1,16 @@
-# zero-GPT · Lecture 1
+# zero-GPT
 
-从一个只保存标量的 `Value` 类出发，亲手实现动态计算图、反向传播、神经元、网络层和一个可训练的多层感知机（MLP）。本仓库整理自个人 `backward.ipynb` 学习代码，并对照 [karpathy/micrograd](https://github.com/karpathy/micrograd) 校正关键实现。
+从零开始学习和复现神经网络与语言模型。P1 从一个只保存标量的 `Value` 类出发，亲手实现动态计算图、反向传播和 MLP；P2 使用字符级 Bigram 理解语言模型的计数实现、概率采样，以及等价的神经网络实现；当前进入 P3，用 embedding、上下文窗口和 MLP 根据多个历史字符预测下一个字符。
 
-> 这一讲还没有实现 GPT。它先解决 GPT、CNN、MLP 都依赖的基础问题：模型怎样计算梯度，以及参数怎样根据梯度更新。
+## 学习进度
+
+| 进度 | 主题 | 参考项目 | 学习产物 | 状态 |
+|---|---|---|---|---|
+| P1 | 标量自动微分与 MLP | [karpathy/micrograd](https://github.com/karpathy/micrograd) | [lecture1.py](lecture1.py) · [backward.ipynb](notebooks/backward.ipynb) | 已完成 |
+| P2 | 字符级 Bigram 语言模型 | [karpathy/makemore](https://github.com/karpathy/makemore) | [P2 学习笔记](notes/P2-bigram.md) · [bigram.ipynb](notebooks/bigram.ipynb) | 进行中 |
+| P3 | Makemore MLP 字符语言模型 | [karpathy/nn-zero-to-hero](https://github.com/karpathy/nn-zero-to-hero) | [P3 学习笔记](notes/P3-makemore-mlp.md) · [复盘模板](notes/TEMPLATE-learning-review.md) | 进行中 |
+
+> 当前仍处于 GPT 的基础阶段。P1 解决“梯度怎样计算、参数怎样更新”，P2 开始解决“语言模型怎样根据已有字符预测下一个字符”。
 
 ## 1. 快速复现
 
