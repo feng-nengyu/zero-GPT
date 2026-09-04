@@ -1,0 +1,41 @@
+site:
+  title: Feng Nengyu · Learning Lab
+  short_title: Learning Lab
+  description: 从神经网络基础出发，持续构建 LLM、RAG、VLA 与 AI systems 能力。
+  github: https://github.com/feng-nengyu/zero-GPT
+
+current:
+  date: 2026-09-04
+  greeting: Good evening
+  headline: 正在把零散的学习，变成可验证、可积累的能力。
+  phase: 基础重建 · Karpathy → CS336
+  checkpoint: 从 Lecture 5 进入 Lecture 6
+  study_hours: 5h / 学习日
+
+today:
+  intent: 先让学习闭环运行起来，再逐步打磨完整作品集。
+  goals:
+    - id: main
+      lane: 主线学习
+      text: 梳理 Lecture 5 的掌握边界，确定 Lecture 6 的起点
+      status: in-progress
+    - id: algorithm
+      lane: 算法基础
+      text: 完成 Python 数组与哈希表的起点诊断
+      status: planned
+    - id: output
+      lane: 公开产出
+      text: 完成 Learning Lab 第一版并形成可访问的内容结构
+      status: in-progress
+
+metrics:
+  - label: 当前主线
+    value: Karpathy L5 → L6
+  - label: 下个里程碑
+    value: Build GPT
+  - label: 求职节点
+    value: 2027 暑期实习
+
+notice:
+  title: 训练与休息安排
+  text: 9 月 19 日至 27 日为半马休息窗口，不累计学习债务；9 月 28 日恢复。

@@ -1,0 +1,56 @@
+tracks:
+  - id: karpathy
+    title: Neural Networks → GPT
+    label: 当前主线
+    progress: 42
+    color: coral
+    summary: 从反向传播、Makemore 与训练稳定性走向 GPT、Tokenizer 和 GPT-2 复现。
+    next: 完成 Lecture 6，并通过概念与代码混合验收。
+  - id: algorithms
+    title: Algorithms with Python
+    label: 每日副线
+    progress: 4
+    color: blue
+    summary: 为技术面试补齐数据结构、常见模式、复杂度分析与编码熟练度。
+    next: 数组、哈希表与双指针起点诊断。
+  - id: cs336
+    title: Stanford CS336
+    label: 下一阶段
+    progress: 0
+    color: violet
+    summary: 系统完成语言模型实现、性能、扩展、数据与对齐训练作业。
+    next: Karpathy GPT 主线完成后进入 A1 Basics。
+  - id: rag-eval
+    title: RAG & Evaluation
+    label: 求职资产
+    progress: 20
+    color: green
+    summary: 将已有 Agent 实习中的 RAG 与评测经验重构为可量化、可公开的案例。
+    next: 定义不涉及实习机密的最小评测项目。
+  - id: vla
+    title: VLA & Embodied AI
+    label: 研究探索
+    progress: 3
+    color: amber
+    summary: 把大模型训练基础迁移到视觉—语言—动作模型与具身智能评测。
+    next: 在单张 A100 上选择可复现 baseline 与评测问题。
+
+phases:
+  - period: 2026.09.04 — 09.18
+    title: 恢复节奏与基础校准
+    focus: Lecture 6、PyTorch 补桥、算法起点、Learning Lab 上线。
+  - period: 2026.09.19 — 09.27
+    title: 半马休息窗口
+    focus: 不安排学习任务，不积累延期事项。
+  - period: 2026.09.28 — 10.31
+    title: Build GPT 阶段
+    focus: GPT、State of GPT、Tokenizer；国庆后开始简历与小规模投递。
+  - period: 2026.11 — 12
+    title: 复现与求职资产
+    focus: GPT-2 124M、RAG 评测案例、VLA baseline 选型。
+  - period: 2027 H1
+    title: CS336 与 VLA 实验
+    focus: A1 → A3、VLA baseline、暑期实习准备与面试。
+  - period: 2027 H2
+    title: 完整能力闭环
+    focus: CS336 数据与对齐作业、研究深化、正式秋招。
