@@ -26,7 +26,7 @@ today:
     - id: output
       lane: 公开产出
       text: 完成 Learning Lab 第一版并形成可访问的内容结构
-      status: in-progress
+      status: done
 
 metrics:
   - label: 当前主线
