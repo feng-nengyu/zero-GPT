@@ -19,7 +19,7 @@ tracks:
     progress: 0
     color: violet
     summary: 系统完成语言模型实现、性能、扩展、数据与对齐训练作业。
-    next: Karpathy GPT 主线完成后进入 A1 Basics。
+    next: Karpathy GPT 主线完成并通过 readiness gate 后，进入 A1 Basics。
   - id: rag-eval
     title: RAG & Evaluation
     label: 求职资产
