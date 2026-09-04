@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run validate && next build",
+    "build": "npm run validate && npm run test:content && next build",
     "start": "next start",
     "typecheck": "next typegen && tsc --noEmit",
-    "validate": "node scripts/validate-content.mjs"
+    "validate": "node scripts/validate-content.mjs",
+    "test:content": "node scripts/test-content-validator.mjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

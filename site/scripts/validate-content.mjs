@@ -10,6 +10,7 @@ const errors = [];
 
 const goalStatuses = new Set(["planned", "in-progress", "done", "carried"]);
 const learningStatuses = new Set(["planned", "learning", "checking", "mastered", "published"]);
+const masteryStatuses = new Set(["learning", "checking", "mastered"]);
 const tracks = new Set(["karpathy", "cs336", "algorithms", "rag-eval", "vla", "meta"]);
 const secretPatterns = [
   [/\bsk-[A-Za-z0-9_-]{20,}\b/g, "OpenAI-style API key"],
@@ -48,6 +49,17 @@ function scanSecrets(file, raw) {
     pattern.lastIndex = 0;
     if (pattern.test(raw)) errors.push(`${file}: possible ${label}; remove it before publishing`);
   }
+}
+
+function hasEvidenceKind(evidence, kind) {
+  return (
+    Array.isArray(evidence) &&
+    evidence.some(
+      (item) =>
+        typeof item === "string" &&
+        item.trim().toLowerCase().startsWith(kind + ":"),
+    )
+  );
 }
 
 const state = readYaml(path.join(contentRoot, "state.yml"));
@@ -111,10 +123,21 @@ for (const kind of ["daily", "notes", "blog", "projects"]) {
       }
     }
 
-    if (kind === "notes" && document.data.mastery === "mastered") {
-      const evidence = document.data.evidence;
-      if (!Array.isArray(evidence) || evidence.length < 2) {
-        errors.push(`${relativeFile}: mastered notes require conceptual and practical evidence`);
+    if (kind === "notes") {
+      if (!masteryStatuses.has(document.data.mastery)) {
+        errors.push(`${relativeFile}: notes require mastery: learning | checking | mastered`);
+      }
+      if (!Array.isArray(document.data.evidence)) {
+        errors.push(`${relativeFile}: notes require an evidence array`);
+      }
+      if (document.data.mastery === "mastered") {
+        const evidence = document.data.evidence;
+        if (!hasEvidenceKind(evidence, "conceptual")) {
+          errors.push(`${relativeFile}: mastered note is missing 'conceptual:' evidence`);
+        }
+        if (!hasEvidenceKind(evidence, "practical")) {
+          errors.push(`${relativeFile}: mastered note is missing 'practical:' evidence`);
+        }
       }
     }
   }

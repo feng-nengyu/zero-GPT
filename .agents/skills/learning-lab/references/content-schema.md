@@ -15,7 +15,15 @@ mastery: learning | checking | mastered
 evidence: []
 ```
 
-`mastery` and `evidence` are required for technical notes. A `mastered` note needs at least one conceptual and one practical evidence item.
+`mastery` and `evidence` are required for technical notes. Evidence is a list of short typed strings. Only entries beginning with `conceptual:` and `practical:` count toward mastery; inputs and prepared scaffolds may use labels such as `conceptual-input:` and `practical-scaffold:`, but do not pass the gate.
+
+A `mastered` note must contain at least one `conceptual:` item and one `practical:` item. Example:
+
+```yaml
+evidence:
+  - "conceptual: independently explained why saturation changes local gradients"
+  - "practical: ran the initialization-scale experiment and interpreted its statistics"
+```
 
 ## Daily log
 
