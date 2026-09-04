@@ -9,7 +9,7 @@ current:
   greeting: Good evening
   headline: 正在把零散的学习，变成可验证、可积累的能力。
   phase: 基础重建 · Karpathy → CS336
-  checkpoint: 从 Lecture 5 进入 Lecture 6
+  checkpoint: Lecture 5 掌握检查 · 等待回答
   study_hours: 5h / 学习日
 
 today:
@@ -17,7 +17,7 @@ today:
   goals:
     - id: main
       lane: 主线学习
-      text: 梳理 Lecture 5 的掌握边界，确定 Lecture 6 的起点
+      text: 回答 tanh 初始化问题，完成 Lecture 5 第一轮知识检查
       status: in-progress
     - id: algorithm
       lane: 算法基础
