@@ -8,6 +8,7 @@ status: checking
 mastery: checking
 evidence:
   - "conceptual-input: 已提交学习笔记截图，涵盖 Kaiming initialization、BatchNorm 公式与 PyTorch API"
+  - "practical-scaffold: 已准备可重复的 tanh 初始化尺度统计脚本，尚未执行解释"
 ---
 
 ## 当前状态
@@ -33,7 +34,9 @@ evidence:
 |---|---|---|
 | 学习输入 | 已记录 | 用户提交的初始化与 BatchNorm 学习截图 |
 | 概念解释 | 等待回答 | 能用自己的话说明前向激活与反向梯度的机制 |
-| 实践验证 | 未开始 | 完成一个比较不同初始化尺度的最小 PyTorch 实验 |
+| 实践验证 | 骨架已准备 | 运行并解释不同初始化尺度下的激活饱和率与梯度统计 |
+
+实验脚本位于 [exercises/karpathy/tanh_init_check.py](https://github.com/feng-nengyu/zero-GPT/blob/main/exercises/karpathy/tanh_init_check.py)。它只输出观测量，不包含结论；等概念回答后再运行和解释。
 
 只有概念解释和实践验证都完成后，状态才会从 checking 改为 mastered。
 
