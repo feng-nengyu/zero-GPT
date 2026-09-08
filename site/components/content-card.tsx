@@ -8,7 +8,13 @@ export function ContentCard({ document }: { document: ContentDocument }) {
     <Link className="content-card" href={`/${document.kind}/${document.slug}`}>
       <div className="content-card-topline">
         <span>{formatDate(document.date)}</span>
-        <StatusPill status={document.mastery || document.status} />
+        <StatusPill
+          status={
+            document.status === "planned"
+              ? "planned"
+              : document.mastery || document.status
+          }
+        />
       </div>
       <h3>{document.title}</h3>
       <p>{document.summary}</p>

@@ -1,7 +1,7 @@
 ---
 title: Stanford CS336 · 自学执行地图
-date: 2026-09-04
-summary: 基于 Spring 2026 官方课程与五个作业，明确依赖、进入条件、算力缩放和自学完成证据。
+date: 2026-09-08
+summary: 半马前切入 L1 与 tokenizer 小实现，国庆推进 A1，按依赖紧凑完成五个作业的自学版本。
 track: cs336
 tags: [cs336, language-modeling, systems, scaling, data, alignment]
 status: planned
@@ -11,9 +11,11 @@ evidence:
   - "source: official assignment repositories for Basics, Systems, Scaling, Data, and Alignment"
 ---
 
-## 结论
+## 当前执行策略（2026-09-08 更新）
 
-CS336 不作为现在与 Karpathy 并行推进的第二门重课。先完成 Karpathy 的 GPT、Tokenizer 与 GPT-2 复现，再用 readiness gate 判断是否进入 CS336。这样 A1 是一次能力整合，而不是重新补 PyTorch 基础。
+希望尽早完成 Karpathy 与 CS336，半马前就做完 CS336 的一部分。现在按知识依赖衔接两门课：先完成 L5 校准、Lecture 6 和 Build GPT 的关键代码，再切入 CS336 L1 与 A1 tokenizer 切片。GPT-2 124M 完整复现不再作为 tokenizer 部分的前置条件。
+
+国庆前主要精力留给课程与必要基础，RAG 评测暂缓。暂定 9 月 19–29 日左右休息、9 月 30 日恢复，国庆在校学习。具体安排见[学习地图](https://feng-nengyu.github.io/zero-GPT/roadmap/)。
 
 本地图核对的是 [Stanford CS336 Spring 2026 官方主页](https://cs336.stanford.edu/)。课程共有 19 讲，覆盖 tokenization、architecture、GPU/Triton、parallelism、scaling、inference、evaluation、data、post-training 与 multimodality。
 
@@ -29,17 +31,15 @@ CS336 不作为现在与 Karpathy 并行推进的第二门重课。先完成 Kar
 
 依赖主线是 A1 → A2；A3 依赖训练与实验分析能力；A4 使用统一训练实现检验数据质量；A5 把前面的模型、训练和评测能力汇合起来。五个作业不应被当成互不相关的 notebook。
 
-## Readiness gate
+## 分阶段进入条件
 
-进入 A1 前需要同时满足：
+**进入 L1 与 A1 tokenizer 切片**：能用 Python 处理 bytes、字典和序列，理解 UTF-8 编码与基本测试。缺口在任务内补齐，不必先完成 GPT-2 复现。
 
-- 能独立写出 decoder-only Transformer 的主要模块，并解释关键 Tensor shape。
-- 能自己实现和调试训练循环、optimizer、checkpoint 与 sampling。
-- 能使用 PyTorch autograd，但也能手算和检查局部梯度。
-- 能在 CPU 上先跑 unit test 和 tiny overfit，再迁移到 GPU。
-- 能粗略估算 parameter、activation memory 与训练 FLOPs。
+**进入 A1 模型与训练部分**：先完成 Build GPT 的关键实践，能解释 causal attention 和主要 tensor shape，自己运行训练、sampling 与小数据 overfit。optimizer、checkpoint、资源估算可结合 CS336 L2/L3 继续学习；不能用助手写好的代码代替验收。
 
-Karpathy 的 GPT、Tokenizer 与 GPT-2 复现将提供前三项证据；缺少的 systems bridge 在进入 A1 前单独补齐。
+**进入 A2**：A1 模型与训练基线必须可测、可复现，并能够解释 autograd、参数与激活显存以及测量方法。
+
+Karpathy 的 Tokenizer 与 A1 的 tokenizer 概念可以相互衔接，但作业核心实现仍由学习者完成。原来的“完成整套 GPT-2 才能开始 CS336”已不再适用。
 
 ## 面向现有算力的缩放规则
 
@@ -68,12 +68,26 @@ Karpathy 的 GPT、Tokenizer 与 GPT-2 复现将提供前三项证据；缺少�
 
 ## 版本策略
 
-Spring 2026 官方主页当前链接上述五个仓库；其中 A1 README 标题仍保留 Spring 2025，说明仓库标签并不完全统一。正式开始每个作业时应记录当日 commit SHA，并以同一 offering 的 handout、tests 与 lectures 为一组，避免跨版本混用。进入 CS336 前再做一次官方版本审计。
+Spring 2026 官方主页当前链接上述五个仓库；其中 A1 README 标题仍保留 Spring 2025，说明仓库标签并不完全统一。正式开始每个作业时应记录当日 commit SHA，并以同一 offering 的 handout、tests 与 lectures 为一组，避免跨版本混用。2026-09-08 已重新核对课程主页与 A1 README；正式进入时再审计讲义、录像及测试，并记录固定 commit SHA。本次尚未冻结版本。
 
-## 预定节奏
+## 紧凑节奏与校准
 
-- 2026 年：完成 Karpathy GPT 主线与一个可量化 RAG/evaluation 项目。
-- 2027 H1：A1 Basics → A2 Systems → A3 Scaling，同时服务暑期实习准备。
-- 2027 H2：A4 Data → A5 Alignment，并将 evaluation、multimodality 与 VLA 探索连接起来。
+以下是根据每天 5 小时作出的进取预算，不是官方工时，也不是已完成记录：
 
-这是一张后续执行地图，不会改变今天的三个 Focus，也不会在当前 Lecture 5 检查完成前提前启动 CS336。
+| 时间 | 目标 | 可核验产物 |
+|---|---|---|
+| 9.8–9.10 | L5 校准、Lecture 6 | 本人概念解释、初始化实验解读、关键 tensor shape |
+| 9.11、9.14–9.15 | Build GPT | 可运行的小模型、causal mask 和 shape 检查、训练与采样 |
+| 9.16–9.18 | CS336 L1 与 A1 tokenizer 切片 | 固定版本记录、本人基础 encode/decode、含中文的 roundtrip 测试 |
+| 9.19–9.29 左右 | 半马与休息 | 不排任务、不积累学习债务，暂按 9.30 恢复 |
+| 9.30–10.18 | A1、Tokenizer、State of GPT 与 GPT-2 124M | 模型与训练测试、小规模训练报告、复现规模差异 |
+| 10.19–11.08 | A2 / A3 与对应课程 | profiling 与优化对比、scaling 实验和外推限制 |
+| 11.09–12.06 | A4 / A5 与课程收口 | 数据 pipeline、对齐实验、可复现记录 |
+
+半马前必须做小：L1 与 tokenizer 的可验证切片优先，BPE trainer 和完整 tokenizer 测试作为冲刺。若 Build GPT 超时，就缩小首个切片，完整 BPE 放到国庆；不挤占休息期。
+
+9.8–18 按 9 个工作日共 45 小时估算，其中约 39 小时主线、3.75 小时算法、2.25 小时记录。如果 9.8 当天已无完整学习时间，首个检查点按剩余工时调整。国庆后每周根据 A1 实际工时校准；12 月上旬是进取目标，算力不足或实现耗时更长时如实调整，绝不靠缩减学习证据宣布完成。
+
+## 当前状态
+
+本次仅调整学习计划与资料入口。CS336 仍未开始，未完成版本冻结、课程学习或任何作业验收。

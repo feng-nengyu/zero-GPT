@@ -1,11 +1,17 @@
+import Link from "next/link";
 export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div>
-        <strong>Keep building. Keep checking.</strong>
-        <p>由学习对话、代码实验和真实复盘持续生成。</p>
+        <strong>
+          A little, every day. <span>✳</span>
+        </strong>
+        <p>从一次对话、一个实验、一点好奇开始。</p>
       </div>
-      <p>Feng Nengyu · 2026</p>
+      <div className="footer-right">
+        <Link href="/about">Feng Nengyu · Learning Lab</Link>
+        <span>学过 ≠ 掌握 · 慢慢来，也会走很远</span>
+      </div>
     </footer>
   );
 }

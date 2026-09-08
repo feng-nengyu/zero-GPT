@@ -15,7 +15,13 @@ export function DocumentLayout({ document }: { document: ContentDocument }) {
         <div className="document-meta">
           <span>{formatDate(document.date)}</span>
           <span>{trackLabels[document.track] || document.track}</span>
-          <StatusPill status={document.mastery || document.status} />
+          <StatusPill
+            status={
+              document.status === "planned"
+                ? "planned"
+                : document.mastery || document.status
+            }
+          />
         </div>
         <h1>{document.title}</h1>
         <p>{document.summary}</p>
@@ -31,7 +37,9 @@ export function DocumentLayout({ document }: { document: ContentDocument }) {
       {document.legacy ? (
         <aside className="mastery-callout">
           <strong>这份笔记正在等待掌握检查</strong>
-          <p>它已经记录了学习过程；通过知识点与最小代码验收后，才会升级为“已掌握”。</p>
+          <p>
+            它已经记录了学习过程；通过知识点与最小代码验收后，才会升级为“已掌握”。
+          </p>
         </aside>
       ) : null}
       <Markdown>{document.body}</Markdown>

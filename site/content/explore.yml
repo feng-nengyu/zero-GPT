@@ -1,0 +1,81 @@
+checked: 2026-09-08
+readings:
+  - id: illustrated-transformer
+    title: The Illustrated Transformer
+    author: Jay Alammar
+    type: 博客
+    topic: Transformer
+    minutes: 10
+    url: https://jalammar.github.io/illustrated-transformer/
+    summary: 用一组图，把 Attention 和 Transformer 连起来。给 Build GPT 留一点直觉。
+    start: 先看 A High-Level Look 和 Self-Attention，不用一次读完。
+  - id: training-recipe
+    title: A Recipe for Training Neural Networks
+    author: Andrej Karpathy
+    type: 博客
+    topic: 训练与调试
+    minutes: 8
+    url: https://karpathy.github.io/2019/04/25/recipe/
+    summary: 模型不收敛时，从哪里开始查？一份可以反复回来的训练排错手册。
+    start: 从 Become one with the data 开始，挑一个检查动作。
+  - id: bpe
+    title: BPE：Tokenizer 是怎么长出来的
+    author: Hugging Face
+    type: 教程
+    topic: Tokenizer
+    minutes: 10
+    url: https://huggingface.co/learn/llm-course/chapter6/5
+    summary: 看一个小词表怎样通过反复合并，变成处理文本的工具。
+    start: 只跟一遍例子里的第一轮合并，再观察词表变化。
+  - id: attention-paper
+    title: Attention Is All You Need
+    author: Vaswani et al. · 2017
+    type: 论文
+    topic: Transformer
+    minutes: 15
+    url: https://arxiv.org/abs/1706.03762
+    summary: 回到 Transformer 的原点。先认出模块，再慢慢读懂推导。
+    start: 打开 PDF 看 Figure 1 和 §3.2 Attention；暂时跳过实验表格。
+  - id: autograd
+    title: PyTorch Autograd：梯度是怎么来的
+    author: PyTorch 官方教程
+    type: 教程
+    topic: PyTorch
+    minutes: 10
+    url: https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html
+    summary: 把 requires_grad、backward 和计算图联系起来，给手写反向传播补一块基础。
+    start: 跟着最小例子走一次 backward，观察梯度存在哪里。
+  - id: openvla
+    title: OpenVLA：从看懂，到行动
+    author: OpenVLA 团队
+    type: 项目
+    topic: VLA
+    minutes: 5
+    url: https://openvla.github.io/
+    summary: 先看机器人演示，建立视觉、语言和动作之间的联系。
+    start: 看一个演示，再找模型输入和动作输出；这还不是复现选题。
+fragments:
+  - id: qkv
+    topic: Attention
+    question: Q、K、V 可以先怎么理解？
+    answer: Q 像当前要找的信息，K 用来匹配，V 是匹配后要汇总的内容。比喻只是入口；实际计算要看 QKᵀ 的分数、softmax 权重，以及对 V 的加权和。
+    source: https://jalammar.github.io/illustrated-transformer/
+    source_title: Jay Alammar · The Illustrated Transformer
+  - id: small-batch
+    topic: 训练与调试
+    question: 正式训练前，为什么先尝试过拟合一个小 batch？
+    answer: 如果连很少的样本都拟合不了，优先检查数据、标签、loss 和参数更新。这是缩小排错范围的手段；小 batch 拟合成功还不能证明模型能泛化。
+    source: https://karpathy.github.io/2019/04/25/recipe/
+    source_title: Andrej Karpathy · A Recipe for Training Neural Networks
+  - id: bpe-merge
+    topic: Tokenizer
+    question: BPE 每一步到底合并什么？
+    answer: 在当前切分和词频统计下，挑出频次最高的相邻 token 对，加入合并规则并更新切分。token 不一定是完整的词，训练出的合并规则也需要保存。
+    source: https://huggingface.co/learn/llm-course/chapter6/5
+    source_title: Hugging Face · Byte-Pair Encoding tokenization
+  - id: vla-action
+    topic: VLA
+    question: VLA 的 Action 和聊天回复有什么不同？
+    answer: VLA 需要把视觉观察和语言指令连接到机器人动作表示。看论文时除了模型规模，也要留意动作如何编码、控制什么机器人、在哪些任务上评测。
+    source: https://openvla.github.io/
+    source_title: OpenVLA · 官方项目页

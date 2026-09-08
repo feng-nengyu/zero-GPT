@@ -40,6 +40,14 @@ evidence:
 
 只有概念解释和实践验证都完成后，状态才会从 checking 改为 mastered。
 
+## 想过之后，直接看这里
+
+- [Karpathy · Activations & Gradients, BatchNorm（官方 Lecture 4）](https://youtu.be/P6sfmUTpUmc)：回看 tanh 与激活、梯度统计的部分。
+- [Karpathy · Becoming a Backprop Ninja（官方 Lecture 5）](https://youtu.be/q8SA3rM6ckI)：看 tanh 和线性层的手写反向传播。
+- [PyTorch · Tanh](https://docs.pytorch.org/docs/stable/generated/torch.nn.Tanh.html)：查定义与曲线，再区分 tanh 局部导数和权重共同决定的跨层梯度。
+
+这些是参考入口，不算新的概念或实践证据。
+
 ## 参考资料
 
 - [Delving Deep into Rectifiers](https://arxiv.org/abs/1502.01852)

@@ -23,7 +23,7 @@ Read `site/content/state.yml`, the latest file in `site/content/daily/`, and any
 
 Use a short mixed check:
 
-1. Ask three to five questions that move from intuition to mechanism and implementation.
+1. Ask one question at a time, moving from intuition to mechanism and implementation across the conversation. Attach relevant source links that the learner can open after thinking; do not front-load an entire assessment.
 2. Give one small code, debugging, tensor-shape, or experiment task.
 3. Record strengths, gaps, and evidence in the relevant note or daily log.
 4. Mark `mastered` only when both conceptual and practical evidence exist. Otherwise use `checking` and assign only the smallest useful repair task.
@@ -35,3 +35,7 @@ Keep assessment conversational. Do not make the learner repeat an entire lecture
 Maintain exactly three daily focuses. Carry unfinished focuses to the next study day with `carried_from`; after three carries, split the task. Run `npm run validate` and `npm run build` from `site/` after structural or presentation changes.
 
 Before publishing, scan changed content for secrets and private or proprietary information. Public-safe learning material is automatic; unsafe material stays out of the site and is represented by a safe summary when useful.
+
+## Maintain the reading space
+
+Keep curated links and assistant-written fragments in explore.yml, distinct from learner notes and blogs. Verify original sources and give a specific starting section. The current focus is Karpathy and an early CS336 slice; defer RAG evaluation until the learner chooses to resume it. Browser drafts and checkboxes never change public mastery or completion status.

@@ -1,33 +1,51 @@
 site:
   title: Feng Nengyu · Learning Lab
   short_title: Learning Lab
-  description: 从神经网络基础出发，持续构建 LLM、RAG、VLA 与 AI systems 能力。
+  description: 一间持续生长的学习空间，记录大模型学习、代码实验与好奇心。
   github: https://github.com/feng-nengyu/zero-GPT
-
 current:
-  date: 2026-09-04
-  greeting: Good evening
-  headline: 正在把零散的学习，变成可验证、可积累的能力。
-  phase: 基础重建 · Karpathy → CS336
-  checkpoint: Lecture 5 掌握检查 · 等待回答
+  date: 2026-09-08
+  greeting: Welcome back
+  headline: 国庆前专心学习 Karpathy，把必要的 PyTorch、算法和数学基础补扎实。
+  phase: 基础学习 · Karpathy → CS336
+  checkpoint: Lecture 5 概念检查 · 等待回答
   study_hours: 5h / 学习日
-
 today:
-  intent: 先让学习闭环运行起来，再逐步打磨完整作品集。
+  intent: 先安心学一点。国庆前聚焦主线，RAG 评测之后再议。
   goals:
     - id: main
       lane: 主线学习
-      text: 回答 tanh 初始化问题，完成 Lecture 5 第一轮知识检查
+      text: 想一想 tanh 初始化问题，再按参考补齐理解
       status: in-progress
     - id: algorithm
       lane: 算法基础
-      text: 完成 Python 数组与哈希表的起点诊断
+      text: 从 Python 数组与哈希表起点诊断开始
       status: planned
     - id: output
       lane: 公开产出
-      text: 完成 Learning Lab 第一版并形成可访问的内容结构
+      text: 把今天对网站和学习节奏的想法留成一条记录
       status: done
-
+break:
+  start: 2026-09-19
+  end: 2026-09-29
+  resume: 2026-09-30
+  tentative: true
+question:
+  title: Lecture 5 · 概念检查 01
+  prompt: 在很多层的 tanh MLP 中，如果权重初始化得过大，前向激活和反向梯度分别会发生什么？为什么？
+  references:
+    - title: Karpathy · Activations & Gradients, BatchNorm
+      url: https://youtu.be/P6sfmUTpUmc
+      hint: 官方 Lecture 4；找 tanh 饱和与激活、梯度统计的部分，先观察图像。
+    - title: Karpathy · Becoming a Backprop Ninja
+      url: https://youtu.be/q8SA3rM6ckI
+      hint: 官方 Lecture 5；关注 tanh 与线性层的手写反向传播。
+    - title: PyTorch · Tanh
+      url: https://docs.pytorch.org/docs/stable/generated/torch.nn.Tanh.html
+      hint: 看定义、曲线和输入输出；再回想局部导数与跨层梯度有什么区别。
+    - title: 最小实验 · tanh 初始化尺度
+      url: https://github.com/feng-nengyu/zero-GPT/blob/main/exercises/karpathy/tanh_init_check.py
+      hint: 概念想过后，运行并解释饱和率、局部导数与梯度统计。助手试跑不算你的实践。
 metrics:
   - label: 当前主线
     value: Karpathy L5 → L6
@@ -35,7 +53,6 @@ metrics:
     value: Build GPT
   - label: 求职节点
     value: 2027 暑期实习
-
 notice:
   title: 训练与休息安排
-  text: 9 月 19 日至 27 日为半马休息窗口，不累计学习债务；9 月 28 日恢复。
+  text: 暂定 9 月 19–29 日左右休息，不累计学习债务；9 月 30 日恢复，国庆在校学习。

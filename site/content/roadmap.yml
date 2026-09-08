@@ -1,56 +1,83 @@
+sprint:
+  title: 半马前，先完成 CS336 的第一小块
+  capacity: 9.8–9.18 按 9 个工作日 × 5 小时估算，共 45 小时；9.8 当天若余量不足，从首个检查点微调，不占用休息期。
+  rhythm: 主线 4 小时 20 分钟 · 算法 25 分钟 · 记录 15 分钟；每天另留 1 小时锻炼。
+  target: 争取完成 CS336 第 1 讲与 A1 tokenizer 的一个可验证切片；不等同于完成 A1。
+  checkpoints:
+    - period: 9.8–9.10
+      title: L5 校准 → Lecture 6
+      result: 回答初始化问题、本人运行实验并解释；完成 WaveNet 的关键代码与 tensor shape 检查。
+      stretch: 能解释 reshape、embedding、BatchNorm 在实现中的位置。
+    - period: 9.11、9.14–9.15
+      title: Build GPT，先把小模型跑通
+      result: 完成核心模块、训练与采样；检查 causal mask、关键 shape 和一次小数据过拟合。
+      stretch: 对照实现定位一个 bug；GPT-2 124M 复现留到国庆衔接。
+    - period: 9.16–9.18
+      title: CS336 L1 + A1 tokenizer 切片
+      result: 核对版本并固定 commit，学习 Overview / tokenization；自己实现基础 encode/decode，验证含中文的 roundtrip。
+      stretch: 完成 BPE trainer 与更多 tokenizer 官方测试；有余力预习 L2 的 PyTorch 与资源估算。
+  fallback: 若 Build GPT 编码超时，半马前保留 L1 与最小 tokenizer 切片，完整 BPE 和训练实验移到国庆；不通过加时挤占锻炼或休息。
+break:
+  start: 2026-09-19
+  end: 2026-09-29
+  resume: 2026-09-30
+  tentative: true
+  note: 按最新反馈暂排 9.19–29 左右休息，具体返校学习日可再调整；期间不积累学习债务。
 tracks:
   - id: karpathy
     title: Neural Networks → GPT
     label: 当前主线
     progress: 42
     color: coral
-    summary: 从反向传播、Makemore 与训练稳定性走向 GPT、Tokenizer 和 GPT-2 复现。
-    next: 完成 Lecture 6，并通过概念与代码混合验收。
-  - id: algorithms
-    title: Algorithms with Python
-    label: 每日副线
-    progress: 4
-    color: blue
-    summary: 为技术面试补齐数据结构、常见模式、复杂度分析与编码熟练度。
-    next: 数组、哈希表与双指针起点诊断。
+    summary: Lecture 5 校准后衔接 Lecture 6 和 Build GPT；Tokenizer 与 CS336 A1 联动学习。
+    next: 先解释 tanh 初始化问题并做最小实验，再进入 Lecture 6。
   - id: cs336
     title: Stanford CS336
-    label: 下一阶段
+    label: 半马前争取启动
     progress: 0
     color: violet
-    summary: 系统完成语言模型实现、性能、扩展、数据与对齐训练作业。
-    next: Karpathy GPT 主线完成并通过 readiness gate 后，进入 A1 Basics。
+    summary: 先切入 L1 与 A1 tokenizer，再随作业补齐课程；不再把 GPT-2 完整复现作为 tokenizer 部分的前置条件。
+    next: 9.16–18 争取完成第一讲和一个 tokenizer 实现切片；正式开始时固定版本。
+  - id: algorithms
+    title: Algorithms with Python
+    label: 每日小练习
+    progress: 4
+    color: blue
+    summary: 先做数组与哈希表诊断，保持约 25 分钟的基础练习，主要时间留给主线。
+    next: 从一道起点题了解编码熟练度，不一次增加整套题单。
   - id: rag-eval
     title: RAG & Evaluation
-    label: 求职资产
+    label: 暂缓 · 国庆后再议
     progress: 20
     color: green
-    summary: 将已有 Agent 实习中的 RAG 与评测经验重构为可量化、可公开的案例。
-    next: 定义不涉及实习机密的最小评测项目。
+    summary: 已有 Agent 实习接触过 RAG 与评测，量化项目尚未启动。国庆前不作为重点。
+    next: 先完成当前课程阶段，再讨论是否安排公开安全的量化案例。
   - id: vla
     title: VLA & Embodied AI
-    label: 研究探索
+    label: 保留探索
     progress: 3
     color: amber
-    summary: 把大模型训练基础迁移到视觉—语言—动作模型与具身智能评测。
-    next: 在单张 A100 上选择可复现 baseline 与评测问题。
-
+    summary: 保留论文与演示的轻量入口。两台各一张 A100 的可用条件尚待确认。
+    next: 选题和正式复现待确认资源及主线节奏后再安排。
 phases:
-  - period: 2026.09.04 — 09.18
-    title: 恢复节奏与基础校准
-    focus: Lecture 6、PyTorch 补桥、算法起点、Learning Lab 上线。
-  - period: 2026.09.19 — 09.27
-    title: 半马休息窗口
-    focus: 不安排学习任务，不积累延期事项。
-  - period: 2026.09.28 — 10.31
-    title: Build GPT 阶段
-    focus: GPT、State of GPT、Tokenizer；国庆后开始简历与小规模投递。
-  - period: 2026.11 — 12
-    title: 复现与求职资产
-    focus: GPT-2 124M、RAG 评测案例、VLA baseline 选型。
-  - period: 2027 H1
-    title: CS336 与 VLA 实验
-    focus: A1 → A3、VLA baseline、暑期实习准备与面试。
-  - period: 2027 H2
-    title: 完整能力闭环
-    focus: CS336 数据与对齐作业、研究深化、正式秋招。
+  - period: 2026.09.08 — 09.18
+    title: Karpathy 补桥，切入 CS336
+    focus: L5 校准、L6、Build GPT；争取 L1 和 A1 tokenizer 的可验证切片。
+  - period: 2026.09.19 — 09.29（暂定）
+    title: 半马与休息
+    focus: 不安排学习任务，不积累延期事项；暂按 9.30 恢复。
+  - period: 2026.09.30 — 10.08
+    title: 国庆在校，集中推进 A1
+    focus: Tokenizer 收口，结合 L2/L3 实现模型、optimizer、训练循环；穿插 State of GPT。
+  - period: 2026.10.09 — 10.18
+    title: A1 收口与 GPT-2 124M
+    focus: 争取完成 A1 核心测试和小规模训练报告；复现 GPT-2，明确与官方训练规模的差异。
+  - period: 2026.10.19 — 11.08
+    title: Systems 与 Scaling
+    focus: 集中推进 A2、A3 与对应课程；GPU 和训练 API 限制明确登记。
+  - period: 2026.11.09 — 12.06
+    title: Data 与 Alignment
+    focus: 集中推进 A4、A5，完成核心实现和缩小算力实验；按 A1 实际用时每周校准日期。
+  - period: 2026.12 — 2027
+    title: 查漏补缺，转化研究与求职成果
+    focus: 目标是尽早完成五个作业的自学版本，再深化项目、研究与实习准备。以上日期是进取目标，不代表已完成或官方满规模验收。

@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run validate && npm run test:content && next build",
+    "build": "npm run validate && npm run test:content && npm run test:export && next build && node scripts/normalize-static-export.mjs",
     "start": "next start",
     "typecheck": "next typegen && tsc --noEmit",
     "validate": "node scripts/validate-content.mjs",
-    "test:content": "node scripts/test-content-validator.mjs"
+    "test:content": "node scripts/test-content-validator.mjs",
+    "test:export": "node --test scripts/test-static-export.mjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

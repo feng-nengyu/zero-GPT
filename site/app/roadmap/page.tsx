@@ -1,54 +1,54 @@
 import type { Metadata } from "next";
-import { ProgressBar } from "@/components/progress-bar";
+import Link from "next/link";
 import { getRoadmap } from "@/lib/content";
-
-export const metadata: Metadata = { title: "Roadmap" };
-
+export const metadata: Metadata = { title: "学习地图" };
 export default function RoadmapPage() {
   const roadmap = getRoadmap();
-
   return (
     <div className="shell page-shell">
-      <header className="page-intro page-intro-wide">
-        <p className="eyebrow">Roadmap · 2026 → 2027</p>
-        <h1>从基础理解，到可证明的技术能力</h1>
+      <header className="page-intro">
+        <p className="eyebrow">A FOCUSED PATH</p>
+        <h1>把主线走紧，把基础学实。</h1>
         <p>
-          Karpathy 建立实现直觉，CS336 补齐系统训练能力；算法、RAG 评测和 VLA
-          把这些能力连接到面试、工程与研究。
+          Karpathy → CS336，按知识依赖衔接。国庆前专心课程，RAG
+          评测暂缓，休息期不补学习债。
         </p>
       </header>
-
-      <section className="roadmap-tracks">
-        {roadmap.tracks.map((track, index) => (
-          <article className="roadmap-row" key={track.id}>
-            <span className="roadmap-index">0{index + 1}</span>
-            <div className="roadmap-copy">
-              <div className="roadmap-titleline">
-                <div>
-                  <span className="roadmap-label">{track.label}</span>
-                  <h2>{track.title}</h2>
-                </div>
-                <strong>{track.progress}%</strong>
-              </div>
-              <p>{track.summary}</p>
-              <ProgressBar value={track.progress} color={track.color} />
-              <div className="roadmap-next">
-                <span>当前下一步</span>
-                <p>{track.next}</p>
-              </div>
-            </div>
-          </article>
-        ))}
+      <section className="sprint-panel">
+        <p className="eyebrow">NEXT CHECKPOINT · 09 / 18</p>
+        <h2>{roadmap.sprint.title}</h2>
+        <p>{roadmap.sprint.target}</p>
+        <div className="sprint-capacity">
+          <span>{roadmap.sprint.capacity}</span>
+          <span>{roadmap.sprint.rhythm}</span>
+        </div>
+        <div className="sprint-steps">
+          {roadmap.sprint.checkpoints.map((c) => (
+            <article key={c.period}>
+              <span>{c.period}</span>
+              <h3>{c.title}</h3>
+              <p>{c.result}</p>
+              <details>
+                <summary>有余力再做</summary>
+                <p>{c.stretch}</p>
+              </details>
+            </article>
+          ))}
+        </div>
+        <p className="sprint-fallback">{roadmap.sprint.fallback}</p>
+        <Link className="text-link" href="/notes/cs336-course-map">
+          进入条件、作业完成标准与版本说明 ↗
+        </Link>
       </section>
-
+      <aside className="roadmap-rest">☁ {roadmap.break.note}</aside>
       <section className="phase-section">
-        <p className="eyebrow">Milestones</p>
-        <h2>阶段安排</h2>
+        <p className="eyebrow">AN AMBITIOUS, ADJUSTABLE TIMELINE</p>
+        <h2>接下来，逐个完成。</h2>
         <div className="phase-list">
-          {roadmap.phases.map((phase, index) => (
+          {roadmap.phases.map((phase, i) => (
             <article key={phase.period}>
               <div className="phase-marker">
-                <span>{index + 1}</span>
+                <span>{i + 1}</span>
               </div>
               <div>
                 <p className="phase-period">{phase.period}</p>
@@ -58,6 +58,27 @@ export default function RoadmapPage() {
             </article>
           ))}
         </div>
+      </section>
+      <section className="roadmap-tracks">
+        <p className="eyebrow">WHERE EACH THREAD STANDS</p>
+        {roadmap.tracks.map((track, i) => (
+          <article className="roadmap-row" key={track.id}>
+            <span className="roadmap-index">0{i + 1}</span>
+            <div className="roadmap-copy">
+              <div className="roadmap-titleline">
+                <div>
+                  <span className="roadmap-label">{track.label}</span>
+                  <h2>{track.title}</h2>
+                </div>
+              </div>
+              <p>{track.summary}</p>
+              <div className="roadmap-next">
+                <span>下一步</span>
+                <p>{track.next}</p>
+              </div>
+            </div>
+          </article>
+        ))}
       </section>
     </div>
   );

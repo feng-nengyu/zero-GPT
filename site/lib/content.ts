@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import yaml from "js-yaml";
+import type { ExploreData } from "./explore-types";
 
 export type ContentKind = "daily" | "notes" | "blog" | "projects";
 
@@ -58,6 +59,12 @@ export interface CurrentState {
       status: GoalStatus;
     }>;
   };
+  break: { start: string; end: string; resume: string; tentative: boolean };
+  question: {
+    title: string;
+    prompt: string;
+    references: Array<{ title: string; url: string; hint: string }>;
+  };
   metrics: Array<{ label: string; value: string }>;
   notice: { title: string; text: string };
 }
@@ -79,6 +86,26 @@ export interface RoadmapPhase {
 }
 
 export interface RoadmapData {
+  sprint: {
+    title: string;
+    capacity: string;
+    rhythm: string;
+    target: string;
+    fallback: string;
+    checkpoints: Array<{
+      period: string;
+      title: string;
+      result: string;
+      stretch: string;
+    }>;
+  };
+  break: {
+    start: string;
+    end: string;
+    resume: string;
+    tentative: boolean;
+    note: string;
+  };
   tracks: RoadmapTrack[];
   phases: RoadmapPhase[];
 }
@@ -124,7 +151,11 @@ function toArray(value: unknown): string[] {
   return value ? [String(value)] : [];
 }
 
-function readDocument(filePath: string, kind: ContentKind, legacy = false): ContentDocument {
+function readDocument(
+  filePath: string,
+  kind: ContentKind,
+  legacy = false,
+): ContentDocument {
   const raw = fs.readFileSync(filePath, "utf8");
   const parsed = matter(raw);
   const slug = path.basename(filePath).replace(/\.mdx?$/, "");
@@ -137,7 +168,9 @@ function readDocument(filePath: string, kind: ContentKind, legacy = false): Cont
   return {
     slug,
     kind,
-    title: String(parsed.data.title || titleFromBody(parsed.content, fallbackTitle)),
+    title: String(
+      parsed.data.title || titleFromBody(parsed.content, fallbackTitle),
+    ),
     date: normalizeDate(parsed.data.date, dateFromFile(filePath)),
     summary: String(
       parsed.data.summary ||
@@ -148,7 +181,11 @@ function readDocument(filePath: string, kind: ContentKind, legacy = false): Cont
     track: String(parsed.data.track || (legacy ? "karpathy" : "meta")),
     tags: toArray(parsed.data.tags),
     status: String(parsed.data.status || (legacy ? "checking" : "learning")),
-    mastery: parsed.data.mastery ? String(parsed.data.mastery) : legacy ? "checking" : undefined,
+    mastery: parsed.data.mastery
+      ? String(parsed.data.mastery)
+      : legacy
+        ? "checking"
+        : undefined,
     evidence: toArray(parsed.data.evidence),
     featured: Boolean(parsed.data.featured),
     links: parsed.data.links as Record<string, string> | undefined,
@@ -184,7 +221,10 @@ export function getAllContent(kind: ContentKind): ContentDocument[] {
   });
 }
 
-export function getContentBySlug(kind: ContentKind, slug: string): ContentDocument | undefined {
+export function getContentBySlug(
+  kind: ContentKind,
+  slug: string,
+): ContentDocument | undefined {
   return getAllContent(kind).find((document) => document.slug === slug);
 }
 
@@ -203,3 +243,7 @@ export const trackLabels: Record<string, string> = {
   vla: "VLA",
   meta: "Learning System",
 };
+
+export function getExplore(): ExploreData {
+  return readYaml<ExploreData>(path.join(contentRoot, "explore.yml"));
+}

@@ -25,7 +25,9 @@ Watching a video or copying code is never enough for `mastered`.
 - During study: capture questions, misconceptions, tensor shapes, experiments, and useful code evidence.
 - Evening: run a short mixed assessment, update statuses, and carry unfinished work forward.
 - A goal carried for three study days should be split into a smaller next action.
-- Do not create learning debt during the break from 2026-09-19 through 2026-09-27.
+- Do not create learning debt during the break from 2026-09-19 through approximately 2026-09-29; tentatively resume on 2026-09-30 (latest learner update on 2026-09-08).
+- Keep the pre-holiday focus on Karpathy and an early CS336 A1 slice; RAG/evaluation is deferred. Prefer a compact, adjustable schedule over extending coursework across 2027.
+- Ask one learning question at a time and attach directly relevant reading links, available after the learner has thought about it.
 
 ## Publishing boundary
 
