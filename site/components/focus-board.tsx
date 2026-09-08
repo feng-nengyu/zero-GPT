@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import type { CurrentState } from "@/lib/content";
 import { StatusPill } from "./status-pill";
 const links: Record<string, string> = {
-  main: "/notes/activation-initialization-batchnorm",
-  algorithm: "/roadmap",
+  main: "/daily#study-main",
+  algorithm: "/daily#study-algorithm",
   output: "/daily",
 };
 export function FocusBoard({ state }: { state: CurrentState }) {
@@ -48,7 +48,7 @@ export function FocusBoard({ state }: { state: CurrentState }) {
       <div className="block-title">
         <div>
           <p className="eyebrow">A SMALL STEP TODAY</p>
-          <h2>{rest ? "安心休息，去跑步吧" : "今天，慢慢推进三件事"}</h2>
+          <h2>{rest ? "安心休息，去跑步吧" : "今天，先做好这三件事"}</h2>
         </div>
         <span className="date-stamp">
           {state.current.date.slice(5).replace("-", " / ")}
@@ -59,7 +59,8 @@ export function FocusBoard({ state }: { state: CurrentState }) {
       </p>
       {date !== state.current.date && !rest && (
         <p className="snapshot-note">
-          这是 {state.current.date} 最近一次安排。新一天的计划，聊完再更新。
+          这是 {state.current.date} 最近一次安排。逐日清单已排到
+          9.18，打开每日待办查看当天计划。
         </p>
       )}
       {!rest && (
@@ -97,7 +98,7 @@ export function FocusBoard({ state }: { state: CurrentState }) {
         <span aria-live="polite">
           {message || "勾选仅保存在本机，不会变更公开进度或掌握状态。"}
         </span>
-        <Link href={`/daily/${state.current.date}`}>学习记录 ↗</Link>
+        <Link href="/daily">看详细学习清单 ↗</Link>
       </div>
     </section>
   );

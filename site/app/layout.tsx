@@ -7,14 +7,14 @@ import { SiteHeader } from "@/components/site-header";
 
 export const metadata: Metadata = {
   title: {
-    default: "Feng Nengyu · Learning Lab",
-    template: "%s · Learning Lab",
+    default: "小鱼 · Learning Lab",
+    template: "%s · 小鱼的 Lab",
   },
   description:
-    "从神经网络基础出发，持续构建 LLM、RAG、VLA 与 AI systems 能力。",
+    "小鱼的学习空间：从 Karpathy 到 CS336，记录课程、代码实验与真实的理解。",
   metadataBase: new URL("https://feng-nengyu.github.io/zero-GPT/"),
   openGraph: {
-    title: "Feng Nengyu · Learning Lab",
+    title: "小鱼 · Learning Lab",
     description:
       "A public learning lab for language models, systems and embodied AI.",
     type: "website",

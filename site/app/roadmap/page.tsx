@@ -1,6 +1,7 @@
+import { CourseCurriculum } from "@/components/course-curriculum";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getRoadmap } from "@/lib/content";
+import { getRoadmap, getStudyPlan } from "@/lib/content";
 export const metadata: Metadata = { title: "学习地图" };
 export default function RoadmapPage() {
   const roadmap = getRoadmap();
@@ -40,6 +41,7 @@ export default function RoadmapPage() {
           进入条件、作业完成标准与版本说明 ↗
         </Link>
       </section>
+      <CourseCurriculum plan={getStudyPlan()} />
       <aside className="roadmap-rest">☁ {roadmap.break.note}</aside>
       <section className="phase-section">
         <p className="eyebrow">AN AMBITIOUS, ADJUSTABLE TIMELINE</p>

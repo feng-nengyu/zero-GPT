@@ -1,3 +1,4 @@
+import type { StudyPlan } from "./study-plan";
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
@@ -246,4 +247,8 @@ export const trackLabels: Record<string, string> = {
 
 export function getExplore(): ExploreData {
   return readYaml<ExploreData>(path.join(contentRoot, "explore.yml"));
+}
+
+export function getStudyPlan(): StudyPlan {
+  return readYaml<StudyPlan>(path.join(contentRoot, "study-plan.yml"));
 }

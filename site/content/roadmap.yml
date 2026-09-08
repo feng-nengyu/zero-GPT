@@ -1,26 +1,26 @@
 sprint:
-  title: 半马前，先完成 CS336 的第一小块
-  capacity: 9.8–9.18 按 9 个工作日 × 5 小时估算，共 45 小时；9.8 当天若余量不足，从首个检查点微调，不占用休息期。
-  rhythm: 主线 4 小时 20 分钟 · 算法 25 分钟 · 记录 15 分钟；每天另留 1 小时锻炼。
-  target: 争取完成 CS336 第 1 讲与 A1 tokenizer 的一个可验证切片；不等同于完成 A1。
+  title: 本周 Karpathy 收尾，下周 CS336 做起来
+  capacity: 9.8–13 共 27 小时（周二至周六每天 5h，周日 2h）；9.14–18 共 25 小时。若当天剩余时间不足，按真实进度调整，不补造学习时长。
+  rhythm: 完整学习日：主线 4h20m、算法 25m、记录 15m；周日：主线 100m、算法 10m、记录 10m。每天另留 1h 锻炼。
+  target: 9.13 前收完 L6、Build GPT、Tokenizer、GPT-2 与 State of GPT 的课程并完成最小实践；9.18 前争取完成 CS336 L1–L3 与 A1 tokenizer，进入模型部分。
   checkpoints:
     - period: 9.8–9.10
-      title: L5 校准 → Lecture 6
-      result: 回答初始化问题、本人运行实验并解释；完成 WaveNet 的关键代码与 tensor shape 检查。
-      stretch: 能解释 reshape、embedding、BatchNorm 在实现中的位置。
-    - period: 9.11、9.14–9.15
-      title: Build GPT，先把小模型跑通
-      result: 完成核心模块、训练与采样；检查 causal mask、关键 shape 和一次小数据过拟合。
-      stretch: 对照实现定位一个 bug；GPT-2 124M 复现留到国庆衔接。
-    - period: 9.16–9.18
-      title: CS336 L1 + A1 tokenizer 切片
-      result: 核对版本并固定 commit，学习 Overview / tokenization；自己实现基础 encode/decode，验证含中文的 roundtrip。
-      stretch: 完成 BPE trainer 与更多 tokenizer 官方测试；有余力预习 L2 的 PyTorch 与资源估算。
-  fallback: 若 Build GPT 编码超时，半马前保留 L1 与最小 tokenizer 切片，完整 BPE 和训练实验移到国庆；不通过加时挤占锻炼或休息。
+      title: L6 → Build GPT → Tokenizer
+      result: L5 校准、WaveNet shape、小 GPT 训练采样、基础 BPE roundtrip；每天都有本人代码或解释。
+      stretch: 用固定小 batch overfit 检查训练链路，增加 tokenizer 边界例子。
+    - period: 9.11–9.13
+      title: GPT-2 → State of GPT → 收尾
+      result: 收完视频，在已确认可用的 A100 上运行短训练，记录 loss、显存、吞吐与采样，周日检查关键缺口。
+      stretch: 配置允许时跑 124M；完整质量复现单独记录数据量、步数和评测。
+    - period: 9.14–9.18
+      title: CS336 L1–L3 + A1 tokenizer
+      result: 固定课程和作业版本；实现 BPE trainer、encode/decode/iterable，逐项跑 tokenizer 测试。
+      stretch: tokenizer 达标后开始 A1 的基础模型组件；9.18 保存恢复点。
+  fallback: 课程收尾与掌握验收分别记录。下周优先保住 tokenizer 的正确实现和测试；模型部分可放到国庆。实现超时按实际卡点缩小当日范围，休息期没有学习债。
 break:
-  start: 2026-09-19
-  end: 2026-09-29
-  resume: 2026-09-30
+  start: '2026-09-19'
+  end: '2026-09-29'
+  resume: '2026-09-30'
   tentative: true
   note: 按最新反馈暂排 9.19–29 左右休息，具体返校学习日可再调整；期间不积累学习债务。
 tracks:
@@ -29,15 +29,15 @@ tracks:
     label: 当前主线
     progress: 42
     color: coral
-    summary: Lecture 5 校准后衔接 Lecture 6 和 Build GPT；Tokenizer 与 CS336 A1 联动学习。
+    summary: 本周完成剩余课程与最小实践；观看、代码实践、已掌握分别记录。
     next: 先解释 tanh 初始化问题并做最小实验，再进入 Lecture 6。
   - id: cs336
     title: Stanford CS336
-    label: 半马前争取启动
+    label: 下周主线 · 9.14 开始
     progress: 0
     color: violet
-    summary: 先切入 L1 与 A1 tokenizer，再随作业补齐课程；不再把 GPT-2 完整复现作为 tokenizer 部分的前置条件。
-    next: 9.16–18 争取完成第一讲和一个 tokenizer 实现切片；正式开始时固定版本。
+    summary: L1–L3 结合 A1 tokenizer：先做 BPE 与完整编码路径，再进模型；后续 19 讲与五个作业分阶段推进。
+    next: 9.14 固定版本，学习 L1，启动 A1；逐日清单已经拆出看课、编码与测试时间。
   - id: algorithms
     title: Algorithms with Python
     label: 每日小练习
@@ -57,27 +57,30 @@ tracks:
     label: 保留探索
     progress: 3
     color: amber
-    summary: 保留论文与演示的轻量入口。两台各一张 A100 的可用条件尚待确认。
+    summary: 保留论文与演示入口。已确认手边有一张 A100 可用；第二台机器与跨机条件仍待确认。
     next: 选题和正式复现待确认资源及主线节奏后再安排。
 phases:
-  - period: 2026.09.08 — 09.18
-    title: Karpathy 补桥，切入 CS336
-    focus: L5 校准、L6、Build GPT；争取 L1 和 A1 tokenizer 的可验证切片。
+  - period: 2026.09.08 — 09.13
+    title: Karpathy 课程与最小实践收尾
+    focus: L5 校准、L6、Build GPT、Tokenizer、GPT-2、State of GPT；A100 短训练与周日检查。
+  - period: 2026.09.14 — 09.18
+    title: CS336 L1–L3，重点推进 A1 tokenizer
+    focus: 版本与环境、BPE trainer、encode/decode/iterable、测试与小语料实验；有余力进入模型。
   - period: 2026.09.19 — 09.29（暂定）
     title: 半马与休息
-    focus: 不安排学习任务，不积累延期事项；暂按 9.30 恢复。
+    focus: 不安排学习任务，不累计延期事项；暂定 9.30 恢复。
   - period: 2026.09.30 — 10.08
-    title: 国庆在校，集中推进 A1
-    focus: Tokenizer 收口，结合 L2/L3 实现模型、optimizer、训练循环；穿插 State of GPT。
-  - period: 2026.10.09 — 10.18
-    title: A1 收口与 GPT-2 124M
-    focus: 争取完成 A1 核心测试和小规模训练报告；复现 GPT-2，明确与官方训练规模的差异。
-  - period: 2026.10.19 — 11.08
-    title: Systems 与 Scaling
-    focus: 集中推进 A2、A3 与对应课程；GPU 和训练 API 限制明确登记。
-  - period: 2026.11.09 — 12.06
-    title: Data 与 Alignment
-    focus: 集中推进 A4、A5，完成核心实现和缩小算力实验；按 A1 实际用时每周校准日期。
-  - period: 2026.12 — 2027
-    title: 查漏补缺，转化研究与求职成果
-    focus: 目标是尽早完成五个作业的自学版本，再深化项目、研究与实习准备。以上日期是进取目标，不代表已完成或官方满规模验收。
+    title: 国庆在校，争取收口 A1
+    focus: 补 L4；模型、optimizer、训练循环、checkpoint、完整测试与 A100 小规模训练报告。
+  - period: 2026.10.09 — 10.25
+    title: A2 · Systems
+    focus: L5–L8、L10，基线测量、Triton attention、并行与显存优化，跨机能力按资源实测。
+  - period: 2026.10.26 — 11.08
+    title: A3 · Scaling
+    focus: L9、L11，受控实验、曲线拟合、预测验证；官方 API 与本地替代规模分开记录。
+  - period: 2026.11.09 — 11.22
+    title: A4 · Data
+    focus: L12–L14，数据处理与过滤去重、统一训练预算下的质量对照。
+  - period: 2026.11.23 — 12.06
+    title: A5 · Alignment 与课程收口
+    focus: L15–L17，SFT / reasoning RL；补 guest lectures，整理五个作业证据。日期按实际用时每周校准。

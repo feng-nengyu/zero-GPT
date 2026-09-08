@@ -1,6 +1,6 @@
 ---
 name: learning-lab
-description: Maintain Feng Nengyu's public learning workflow and website from natural-language study conversations, submitted notes, code, screenshots, assessments, and progress updates. Use for daily planning, learning checks, content capture, roadmap changes, and Learning Lab site maintenance in zero-GPT.
+description: Maintain 小鱼's public learning workflow and website from natural-language study conversations, submitted notes, code, screenshots, assessments, and progress updates. Use for daily planning, learning checks, content capture, roadmap changes, and Learning Lab site maintenance in zero-GPT.
 ---
 
 # Maintain the Learning Lab
@@ -38,4 +38,4 @@ Before publishing, scan changed content for secrets and private or proprietary i
 
 ## Maintain the reading space
 
-Keep curated links and assistant-written fragments in explore.yml, distinct from learner notes and blogs. Verify original sources and give a specific starting section. The current focus is Karpathy and an early CS336 slice; defer RAG evaluation until the learner chooses to resume it. Browser drafts and checkboxes never change public mastery or completion status.
+Keep curated links and assistant-written fragments in explore.yml, distinct from learner notes and blogs. Verify original sources and give a specific starting section. The current focus is finishing Karpathy in the week of 2026-09-08, then CS336 L1–L3 and A1 tokenizer on 09-14–18; defer RAG evaluation until the learner chooses to resume it. Use 小鱼 as the public display name. Maintain the dated, actionable study-plan.yml alongside the roadmap. Browser drafts and checkboxes never change public mastery or completion status.

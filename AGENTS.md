@@ -1,6 +1,6 @@
 # Learning Lab working agreement
 
-This repository is Feng Nengyu's public Learning Lab. Treat the conversation as the control surface and the repository as durable memory.
+This repository is 小鱼's public Learning Lab. Treat the conversation as the control surface and the repository as durable memory.
 
 ## Default behavior
 
@@ -26,7 +26,9 @@ Watching a video or copying code is never enough for `mastered`.
 - Evening: run a short mixed assessment, update statuses, and carry unfinished work forward.
 - A goal carried for three study days should be split into a smaller next action.
 - Do not create learning debt during the break from 2026-09-19 through approximately 2026-09-29; tentatively resume on 2026-09-30 (latest learner update on 2026-09-08).
-- Keep the pre-holiday focus on Karpathy and an early CS336 A1 slice; RAG/evaluation is deferred. Prefer a compact, adjustable schedule over extending coursework across 2027.
+- Latest plan: finish remaining Karpathy courses and minimal practice this week (2026-09-08–13); focus on CS336 L1–L3 and A1 tokenizer next week (09-14–18). Saturday 5h and Sunday 2h are included. RAG/evaluation stays deferred.
+- Use 小鱼 in all public display names; preserve actual repository/account URLs. One A100 is now available, while VRAM, environment and a second machine remain to be checked.
+- Keep study-plan.yml as the detailed dated plan: durations, course links, next actions and completion criteria. Future plans are not daily learning logs or evidence.
 - Ask one learning question at a time and attach directly relevant reading links, available after the learner has thought about it.
 
 ## Publishing boundary

@@ -1,21 +1,21 @@
 site:
-  title: Feng Nengyu · Learning Lab
+  title: 小鱼 · Learning Lab
   short_title: Learning Lab
   description: 一间持续生长的学习空间，记录大模型学习、代码实验与好奇心。
   github: https://github.com/feng-nengyu/zero-GPT
 current:
-  date: 2026-09-08
+  date: '2026-09-08'
   greeting: Welcome back
-  headline: 国庆前专心学习 Karpathy，把必要的 PyTorch、算法和数学基础补扎实。
+  headline: 本周收完 Karpathy，下周重点学习 CS336 L1–L3 与 A1 tokenizer。
   phase: 基础学习 · Karpathy → CS336
   checkpoint: Lecture 5 概念检查 · 等待回答
   study_hours: 5h / 学习日
 today:
-  intent: 先安心学一点。国庆前聚焦主线，RAG 评测之后再议。
+  intent: 今天校准 L5，完成 L6 WaveNet；课程、代码和检查按清单逐步来。
   goals:
     - id: main
       lane: 主线学习
-      text: 想一想 tanh 初始化问题，再按参考补齐理解
+      text: L5 概念与实验检查 → L6 WaveNet 课程和最小实践
       status: in-progress
     - id: algorithm
       lane: 算法基础
@@ -26,9 +26,9 @@ today:
       text: 把今天对网站和学习节奏的想法留成一条记录
       status: done
 break:
-  start: 2026-09-19
-  end: 2026-09-29
-  resume: 2026-09-30
+  start: '2026-09-19'
+  end: '2026-09-29'
+  resume: '2026-09-30'
   tentative: true
 question:
   title: Lecture 5 · 概念检查 01
@@ -50,7 +50,7 @@ metrics:
   - label: 当前主线
     value: Karpathy L5 → L6
   - label: 下个里程碑
-    value: Build GPT
+    value: 9.14 进入 CS336
   - label: 求职节点
     value: 2027 暑期实习
 notice:

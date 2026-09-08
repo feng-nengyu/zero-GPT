@@ -1,0 +1,757 @@
+updated: '2026-09-08'
+version: 2026-09-08-v2
+timing_note: 下列分钟数是包含暂停、笔记与动手的学习预算，不是录像净时长。L6 / Build GPT / Tokenizer 的官方时长分别为 56 / 116 / 133 分钟；GPT-2 与 State of GPT 按分段观看预算安排。CS336 每讲先留 95 分钟，实际录像时长和版本在开学当日复核。 CS336 以官网当前录像列表为主入口；已核对的 2025 L2/L3 直达录像仅作备用，使用时记录与本次讲义的差异。
+boundary: 本周目标是收完剩余课程、做出最小可运行实现；已确认一张 A100 可用；GPT-2 完整训练另记数据和步数。看完、实践完成、已掌握分别记录。用时超出就保留卡点并重新排期，不挤占每天 1 小时锻炼或 9.19–29 的休息。
+sources:
+  l5:
+    title: L5 · Backprop Ninja
+    url: https://youtu.be/q8SA3rM6ckI
+  l6:
+    title: L6 · Building a WaveNet · 56 分钟
+    url: https://youtu.be/t3YJ5hKiMQ0
+  gpt:
+    title: Build GPT · 1 小时 56 分钟
+    url: https://www.youtube.com/watch?v=kCc8FmEb1nY
+  tokenizer:
+    title: GPT Tokenizer · 2 小时 13 分钟
+    url: https://youtu.be/zduSFxRajkE
+  gpt2:
+    title: Reproduce GPT-2 (124M) · 视频
+    url: https://youtu.be/l8pRSuU81PU
+  nano:
+    title: build-nanogpt · 官方代码与勘误
+    url: https://github.com/karpathy/build-nanogpt
+  state:
+    title: State of GPT · Microsoft Build 2023
+    url: https://www.youtube.com/watch?v=bZQun8Y4L2A
+  tanh:
+    title: tanh 初始化实验 · 运行后发我结果
+    url: https://github.com/feng-nengyu/zero-GPT/blob/main/exercises/karpathy/tanh_init_check.py
+  tanhdoc:
+    title: PyTorch · Tanh 定义
+    url: https://docs.pytorch.org/docs/stable/generated/torch.nn.Tanh.html
+  syllabus:
+    title: Karpathy · 官方课程与时长
+    url: https://karpathy.ai/zero-to-hero.html
+  cs:
+    title: CS336 · Spring 2026 课程表
+    url: https://cs336.stanford.edu/
+  videos:
+    title: CS336 · 官方主页链接的录像列表
+    url: https://www.youtube.com/watch?list=PLoROMvodv4rMqXOcazWaTUHhq-yembLCV&v=JuoVZkPBiKk
+  cs1:
+    title: L1 · Overview / tokenization 讲义
+    url: https://cs336.stanford.edu/lectures/?trace=lecture_01
+  cs2:
+    title: L2 · PyTorch / resource accounting 讲义
+    url: https://cs336.stanford.edu/lectures/?trace=lecture_02
+  cs3:
+    title: L3 · Architectures / hyperparameters 讲义
+    url: https://github.com/stanford-cs336/lectures/blob/main/lecture_03.pdf
+  a1:
+    title: A1 · Basics / 环境说明
+    url: https://github.com/stanford-cs336/assignment1-basics
+  handout:
+    title: A1 · 官方 handout
+    url: https://github.com/stanford-cs336/assignment1-basics/blob/main/cs336_assignment1_basics.pdf
+  python:
+    title: Python · 数据结构
+    url: https://docs.python.org/3/tutorial/datastructures.html
+  cs2video:
+    title: 备用录像 · L2 / Spring 2025
+    url: https://www.youtube.com/watch?v=msHyYioAyNE
+  cs3video:
+    title: 备用录像 · L3 / Spring 2025
+    url: https://www.youtube.com/watch?v=ptFiH_bHnJw
+weeks:
+  - id: karpathy
+    label: 本周 · Karpathy 收尾
+    period: 9.8–9.13
+    target: L6 → Build GPT → Tokenizer → GPT-2 → State of GPT；周日用自己的代码与解释收尾。
+    note: 本周末继续学习：周六 5h、周日 2h 轻量收尾；每天另留 1h 锻炼。
+  - id: cs336
+    label: 下周 · CS336 主线
+    period: 9.14–9.18
+    target: 学习 L1–L3；重点完成 A1 tokenizer 与相关测试，周五开始模型组件。
+    note: 优先保住 tokenizer 的可验证产物；模型部分是进度允许时的下一步。9.19–29 不安排学习。
+days:
+  - date: '2026-09-08'
+    week: karpathy
+    title: L5 校准 + L6 WaveNet
+    outcome: 把 L5 的梯度问题讲明白，跑通 WaveNet 的 shape 与一次前后向。
+    minutes: 300
+    blocks:
+      - id: l5-check
+        kind: check
+        minutes: 40
+        title: 先补上 L5 的一个检查点
+        task: 先独立回答页面下方的 tanh 问题，再运行初始化实验；把三种尺度的输出与解释发来。
+        done: 能区分 tanh 局部导数和含权重连乘的跨层梯度；未解释清楚就保留待检查。
+        sources:
+          - tanh
+          - l5
+      - id: l6-watch
+        kind: watch
+        minutes: 70
+        title: 看 L6 · WaveNet
+        task: 观看全片 56 分钟，另留 14 分钟暂停；重点记 context 如何分组、reshape 前后维度。
+        done: 写出至少一组 (B,T,C) 在层间变化的过程。
+        sources:
+          - l6
+      - id: l6-code
+        kind: code
+        minutes: 110
+        title: 自己敲出层级上下文模型
+        task: 从已有 makemore 继续实现分组与网络；先小 batch 前后向，再短训练。代码卡住先缩小输入定位。
+        done: 保存本人运行的 shape、loss 和一段采样；训练步数与配置写清楚。
+        sources:
+          - l6
+      - id: l6-review
+        kind: check
+        minutes: 40
+        title: 合上视频，检查实现
+        task: 换一个 context size，定位需要修改的维度；剩余时间处理一个 bug 或回看刚才卡住的片段。
+        done: 能指出 embedding、分组和输出层各自的输入输出。
+        sources:
+          - l6
+      - id: algorithm
+        kind: algorithm
+        minutes: 25
+        title: 数组与哈希表起点诊断
+        task: 用 Python 判断列表是否存在重复元素，先写朴素版本，再尝试 set。
+        done: 跑空列表、有重复、无重复三个例子；说出时间与空间复杂度。
+        sources:
+          - python
+      - id: output
+        kind: output
+        minutes: 15
+        title: 留下今天的进展
+        task: 网站与节奏反馈已经记下；学习后再发一句理解、一个结果和一个卡点。
+        done: 新增学习结果等本人反馈后写入；现有反馈记录不代表学习步骤完成。
+        sources: []
+    question:
+      prompt: 在很多层的 tanh MLP 中，如果权重初始化得过大，前向激活和反向梯度分别会发生什么？为什么？
+      sources:
+        - l5
+        - tanhdoc
+        - tanh
+  - date: '2026-09-09'
+    week: karpathy
+    title: Build GPT · 从 attention 到采样
+    outcome: 把一个小型字符级 GPT 的训练与采样接起来。
+    minutes: 300
+    blocks:
+      - id: gpt-watch
+        kind: watch
+        minutes: 140
+        title: 看完 Build GPT
+        task: 观看全片 116 分钟，留 24 分钟暂停；沿着 bigram → self-attention → block → GPT 跟踪结构。
+        done: 在纸上标出 Q/K/V、causal mask、残差与输出 logits 的位置。
+        sources:
+          - gpt
+      - id: gpt-code
+        kind: code
+        minutes: 90
+        title: 完成最小训练与 generate
+        task: 自己实现 attention 和 block；先用很小的层数与 batch 检查前后向，再运行短训练、生成文本。
+        done: 记录 train/validation loss、训练步数和一段样本，不追求文本质量。
+        sources:
+          - gpt
+      - id: gpt-check
+        kind: check
+        minutes: 30
+        title: 检查 mask 和数据泄漏
+        task: 对一个极小 batch 检查 attention 矩阵；尝试 overfit 固定小 batch，不能下降就留下定位记录。
+        done: 未来位置权重为 0，logits 为 (B,T,V)，loss 与输入移位对应。
+        sources:
+          - gpt
+      - id: algorithm
+        kind: algorithm
+        minutes: 25
+        title: 哈希表 · 两数之和
+        task: 先说明为什么需要记住之前的数，再写一个返回下标的函数。
+        done: 用重复数字和无答案输入测试；解释 O(n) 时间。
+        sources:
+          - python
+      - id: output
+        kind: output
+        minutes: 15
+        title: 记录 GPT 的一条证据
+        task: 发主要 tensor shape、一次 loss 记录和你最不确定的一个模块。
+        done: 据实际结果形成短记录，不为了公开产出另写长文。
+        sources: []
+    question:
+      prompt: 如果 causal mask 去掉，训练 loss 可能变好，为什么生成时却会出问题？
+      sources:
+        - gpt
+  - date: '2026-09-10'
+    week: karpathy
+    title: Tokenizer · bytes → BPE
+    outcome: 亲手做一个小 BPE，实现 encode/decode 的 roundtrip。
+    minutes: 300
+    blocks:
+      - id: tok-watch
+        kind: watch
+        minutes: 150
+        title: 看 GPT Tokenizer
+        task: 观看全片 133 分钟，留 17 分钟暂停；区分 UTF-8 bytes、merge、词表与 special tokens。
+        done: 手算一次最高频相邻 pair 的合并，写清新 token 代表哪些 bytes。
+        sources:
+          - tokenizer
+      - id: tok-code
+        kind: code
+        minutes: 90
+        title: 写一个小 BPE
+        task: 用自己构造的小文本实现 pair 计数、merge 与基础 encode/decode；这是课程练习，A1 按 handout 再独立实现。
+        done: 在英文、中文、emoji 三个字符串上验证 decode(encode(x)) == x。
+        sources:
+          - tokenizer
+      - id: tok-check
+        kind: check
+        minutes: 20
+        title: 检查边界并整理卡点
+        task: 检查空串和重复文本；把基础版还没处理的 regex、special tokens 等差异写出来。
+        done: 保留通过和失败的例子；不把基础版称作完整 GPT tokenizer。
+        sources:
+          - tokenizer
+      - id: algorithm
+        kind: algorithm
+        minutes: 25
+        title: 字典计数
+        task: 统计序列中相邻 pair 的频率，构造频数相同的例子。
+        done: 能解释字典键的设计、计数循环和相同频数的处理方式。
+        sources:
+          - python
+      - id: output
+        kind: output
+        minutes: 15
+        title: 记下 tokenizer 的边界
+        task: 记录一个中文 roundtrip、一个失败例子，以及当前支持的能力。
+        done: 把本周学习版与下周 A1 要求分开写。
+        sources: []
+    question:
+      prompt: 为什么 byte-level tokenizer 能处理训练时没见过的字符，而按字符建词表可能需要 unknown token？
+      sources:
+        - tokenizer
+  - date: '2026-09-11'
+    week: karpathy
+    title: GPT-2 124M · 结构与训练入口
+    outcome: 读懂并搭起 GPT-2 的结构和最小训练入口。
+    minutes: 300
+    blocks:
+      - id: gpt2-first
+        kind: watch
+        minutes: 135
+        title: 看 GPT-2 视频前约 2 小时
+        task: 从开头看到约 2:00:00，预留暂停；实际停下的时间点写入记录，第二天从那里继续。
+        done: 记下模型定义、权重加载与训练效率相关的关键变化。
+        sources:
+          - gpt2
+          - nano
+      - id: gpt2-code
+        kind: code
+        minutes: 100
+        title: 完成模型结构与 smoke test
+        task: 按视频逐步实现关键模块，先用小配置检查前后向，再在手边 A100 上实例化 124M，核对参数量与显存。
+        done: 保留自己运行的参数量、logits shape、一个训练 step 与运行设备。
+        sources:
+          - nano
+      - id: gpt2-check
+        kind: check
+        minutes: 25
+        title: 做一张训练配置卡
+        task: 列出 batch、sequence length、层数、宽度、dtype 与数据；记录 A100 显存容量、驱动与 PyTorch/CUDA 是否可用。
+        done: 明确小配置与 124M、完整训练之间的差异；列出一个待解的实现问题。
+        sources:
+          - nano
+      - id: algorithm
+        kind: algorithm
+        minutes: 25
+        title: 数组 · 双指针
+        task: 写一个原地反转列表的函数，说明左右指针什么时候结束。
+        done: 跑长度 0、1、奇数、偶数四种输入。
+        sources:
+          - python
+      - id: output
+        kind: output
+        minutes: 15
+        title: 记录 GPT-2 实践起点
+        task: 发配置、运行结果与视频暂停时间点。
+        done: 以本人运行记录为准，未训练的配置只标计划。
+        sources: []
+    question:
+      prompt: 为什么 gradient accumulation 能增大有效 batch，却不等于把所有样本同时放进显存？
+      sources:
+        - gpt2
+        - nano
+  - date: '2026-09-12'
+    week: karpathy
+    title: GPT-2 下半程 + State of GPT
+    outcome: 收完课程视频，理解训练工程与模型能力的连接。
+    minutes: 300
+    blocks:
+      - id: gpt2-rest
+        kind: watch
+        minutes: 140
+        title: 接着看完 GPT-2 视频
+        task: 从昨天记录的位置继续看到结尾；暂停整理优化、验证和采样流程。若前一天没到 2 小时，优先保证本片看完。
+        done: 把看懂的环节与还没亲手做的优化分开列出。
+        sources:
+          - gpt2
+          - nano
+      - id: state-watch
+        kind: watch
+        minutes: 50
+        title: 看 State of GPT
+        task: 预算 50 分钟观看与简记；这是 2023 年报告，用来建立 pretraining、SFT、RLHF 的流程图。
+        done: 画出训练阶段关系，并说清 base model 与 assistant 的区别。
+        sources:
+          - state
+      - id: gpt2-run
+        kind: code
+        minutes: 50
+        title: 短训练并记录
+        task: 在手边 A100 上先跑小配置，再尝试 124M 的短训练；warmup 后记录 loss、峰值显存、tokens/s 与采样，按实测调整 batch。
+        done: 留下 A100 型号/显存、参数量、步数、dtype、loss、显存、吞吐与采样；短训练不算完整质量复现。
+        sources:
+          - nano
+      - id: gpt2-review
+        kind: check
+        minutes: 20
+        title: 留一个明天要解决的问题
+        task: 检查训练记录是否可复现，把最阻碍理解的一个问题带到周日。
+        done: 明确自己完成了什么、尚缺哪项证据。
+        sources:
+          - gpt2
+      - id: algorithm
+        kind: algorithm
+        minutes: 25
+        title: 复习一次哈希题
+        task: 不看昨天代码，重写两数之和或重复元素检测，选择较不熟的一道。
+        done: 自己构造边界输入，若卡住先说明思路。
+        sources:
+          - python
+      - id: output
+        kind: output
+        minutes: 15
+        title: 汇总一张课程完成清单
+        task: 列出 L6、Build GPT、Tokenizer、GPT-2、State of GPT 的观看与实践状态。
+        done: 只按真实完成更新，不从日期或勾选推断掌握。
+        sources: []
+    question:
+      prompt: 一个只训练 next-token prediction 的 base model，为什么不能直接等同于一个可靠的聊天助手？
+      sources:
+        - state
+  - date: '2026-09-13'
+    week: karpathy
+    title: 轻量收尾 · 带着代码进入 CS336
+    outcome: 用 2 小时把最关键的欠缺定位清楚，为周一进入 A1 做准备。
+    minutes: 120
+    blocks:
+      - id: recall
+        kind: check
+        minutes: 30
+        title: 不看资料，回忆整个链路
+        task: 画出文本 → tokens → embeddings → attention → logits → loss → backward，标出关键 shape。
+        done: 先解释最不确定的一处；概念与实践证据分别记录。
+        sources:
+          - gpt
+          - tokenizer
+      - id: repair
+        kind: code
+        minutes: 55
+        title: 只修最重要的一个缺口
+        task: 从小 GPT overfit、BPE roundtrip 或 GPT-2 smoke test 中选一个未通过项，亲手修到可复现。
+        done: 有本人代码和输出；未解决的问题保留，不以课程看完代替实践通过。
+        sources:
+          - gpt
+          - tokenizer
+          - nano
+      - id: handoff
+        kind: read
+        minutes: 15
+        title: 准备周一入口
+        task: 打开 CS336 课程页与 A1 README，确认下周先做 tokenizer；此处只预览，不算版本冻结或作业开始。
+        done: 把环境、数据、GPU 的已知条件与未知条件各记一行。
+        sources:
+          - cs
+          - a1
+      - id: algorithm
+        kind: algorithm
+        minutes: 10
+        title: 一道旧题口述
+        task: 选本周最容易卡住的题，用自己的话说出数据结构与复杂度。
+        done: 能不用题解解释为什么这样做。
+        sources:
+          - python
+      - id: output
+        kind: output
+        minutes: 10
+        title: 发一个简短周复盘
+        task: 发本周实际完成、仍待检查和下周首个动作，我来整理周总结。
+        done: 只引用真实代码、日志与解释；无需自己写 Markdown。
+        sources: []
+    question:
+      prompt: 给小 GPT 的输入是 (B,T)，能沿着模型说明每个主要张量的 shape，以及 loss 的 target 来自哪里吗？
+      sources:
+        - gpt
+  - date: '2026-09-14'
+    week: cs336
+    title: CS336 L1 + A1 环境与 byte tokenizer
+    outcome: 正式进入 CS336，留下版本记录和第一个本人实现。
+    minutes: 300
+    blocks:
+      - id: freeze
+        kind: read
+        minutes: 35
+        title: 固定本次学习版本
+        task: 从 Spring 2026 官网进入录像、讲义和 A1；记录 offering、录像实际年份、handout 与仓库 commit SHA。先读 README 再配置环境。
+        done: 保留完整 SHA、Python/依赖版本与实际执行命令；官方测试的未实现失败属于基线。
+        sources:
+          - cs
+          - a1
+          - handout
+      - id: cs1-watch
+        kind: watch
+        minutes: 95
+        title: 看 L1 · Overview / tokenization
+        task: 先核对录像对应年份和讲义，预算 95 分钟观看与暂停；必要的跨年差异写在版本记录。
+        done: 能把 tokenization 的训练、编码、解码分开说明。
+        sources:
+          - videos
+          - cs1
+      - id: a1-read
+        kind: read
+        minutes: 40
+        title: 读 A1 tokenizer 要求
+        task: 只读当前 tokenizer 部分，列出接口、special tokens、确定性与测试要求；不看参考解答。
+        done: 用自己的话写出输入、输出及两个边界例子。
+        sources:
+          - handout
+      - id: a1-bytes
+        kind: code
+        minutes: 90
+        title: 实现最小 bytes / decode 骨架
+        task: 自己建立 byte 词表与解码路径，先做小样本往返；连接当日版本的测试适配入口。
+        done: 英文、中文、emoji 与空串能按预期往返；这只是 A1 第一块。
+        sources:
+          - a1
+          - handout
+      - id: algorithm
+        kind: algorithm
+        minutes: 25
+        title: bytes 与字典小练习
+        task: 把一个含中文和 emoji 的字符串转为 UTF-8 bytes，统计 byte 频率。
+        done: 能区分字符数、byte 数和 token 数；此练习计入算法时间一次。
+        sources:
+          - python
+      - id: output
+        kind: output
+        minutes: 15
+        title: 保存版本与第一块结果
+        task: 发版本记录、当前测试结果和一个还不理解的要求。
+        done: 我整理成开课记录，不公开课程答案。
+        sources: []
+    question:
+      prompt: BPE 的 train、encode 和 decode 各解决什么问题，为什么 encode 不能每次重新训练 merges？
+      sources:
+        - cs1
+        - handout
+  - date: '2026-09-15'
+    week: cs336
+    title: A1 · BPE trainer
+    outcome: 集中写 tokenizer，不用每天加一节新课。
+    minutes: 300
+    blocks:
+      - id: trainer-read
+        kind: read
+        minutes: 35
+        title: 读清 BPE training 的规则
+        task: 回看 handout 当前章节，重点确认 pre-tokenization、special tokens、tie-breaking。
+        done: 手算小文本的两轮 merge，明确当前版本的确定性规则。
+        sources:
+          - handout
+          - cs1
+      - id: trainer-code
+        kind: code
+        minutes: 170
+        title: 自己实现 BPE trainer
+        task: 分两轮编码：先小数据完整循环，再查边界与重复 pair；中间休息，休息不计学习工时。
+        done: 小语料可生成词表与 merges；相同配置可复现，不先追求大数据性能。
+        sources:
+          - handout
+      - id: trainer-test
+        kind: check
+        minutes: 55
+        title: 对照官方 trainer 测试定位问题
+        task: 运行固定版本中对应测试，先修第一个失败再跑回归；保存实际命令、通过数与失败原因。
+        done: 核心正确性测试优先；性能测试若未过，单独登记而不宣布全过。
+        sources:
+          - a1
+      - id: algorithm
+        kind: algorithm
+        minutes: 25
+        title: 确定性排序
+        task: 给相同频率的 pair 写一个明确的排序键，自己构造 tie case。
+        done: 解释排序的主键、次键与复杂度，不复制整段作业实现。
+        sources:
+          - python
+      - id: output
+        kind: output
+        minutes: 15
+        title: 记录第一个 BPE bug
+        task: 用输入、预期、实际、定位四行描述一个真实问题。
+        done: 没有遇到 bug 就记录一次手算与代码对照，不编造失败。
+        sources: []
+    question:
+      prompt: 同一份文本、同一词表大小，BPE 训练为什么仍需要明确规定频数相同时如何选 pair？
+      sources:
+        - handout
+  - date: '2026-09-16'
+    week: cs336
+    title: CS336 L2 + encode / decode
+    outcome: 连接 PyTorch 基础与资源意识，同时补齐 tokenizer 编码路径。
+    minutes: 300
+    blocks:
+      - id: cs2-watch
+        kind: watch
+        minutes: 95
+        title: 看 L2 · PyTorch / 资源估算
+        task: 结合讲义看 tensor 运算、einops、参数/激活占用和 FLOPs；需要时暂停用小数组验证。
+        done: 手算一个矩阵乘法的 shape 与大致 FLOPs，说明 dtype 如何影响内存。
+        sources:
+          - videos
+          - cs2
+          - cs2video
+      - id: encoding-code
+        kind: code
+        minutes: 125
+        title: 实现 encode / decode
+        task: 根据 A1 handout 把已训练 merges 用到新文本；处理 special tokens 和未知文本的 bytes 路径。
+        done: 普通文本、中文、emoji、special tokens 的行为符合当前 handout。
+        sources:
+          - handout
+      - id: encoding-check
+        kind: check
+        minutes: 40
+        title: 跑往返与一致性检查
+        task: 先跑自己的小输入，再跑官方相关测试；若 trainer 尚未完成，先补其正确性，L2 只记待补片段。
+        done: 留下具体通过项与失败项；不以几个 roundtrip 宣称 tokenizer 完成。
+        sources:
+          - a1
+          - handout
+      - id: algorithm
+        kind: algorithm
+        minutes: 25
+        title: reshape 与索引
+        task: 给 2×3×4 张量画出索引，口述 reshape 和转置的区别。
+        done: 能判断一次操作是否改变元素排列；用小数组验证。
+        sources:
+          - python
+      - id: output
+        kind: output
+        minutes: 15
+        title: 记录一笔资源账
+        task: 发一个张量的 shape、dtype、估算字节数，以及实际 tokenizer 测试结果。
+        done: 这条记录来自自己的计算或运行。
+        sources: []
+    question:
+      prompt: 参数量相同的两个训练配置，为什么峰值显存可能相差很大？
+      sources:
+        - cs2
+  - date: '2026-09-17'
+    week: cs336
+    title: A1 · tokenizer 测试与小语料
+    outcome: 把 tokenizer 做成可验证的一块，半马前至少留下一项实作。
+    minutes: 300
+    blocks:
+      - id: iterable-read
+        kind: read
+        minutes: 30
+        title: 读 iterable / special tokens 的细则
+        task: 按固定 handout 找出剩余要求，检查流式输入、边界和性能约束。
+        done: 列出尚未覆盖的测试类别，而非只记总通过数。
+        sources:
+          - handout
+      - id: tokenizer-finish
+        kind: code
+        minutes: 135
+        title: 完成余下 tokenizer 接口
+        task: 补 encode_iterable 与边界处理，先保证正确；若当前版本要求不同，以版本记录为准。
+        done: 小样本 iterable 编码与整体编码满足 handout 指定的一致性要求。
+        sources:
+          - handout
+      - id: tokenizer-tests
+        kind: check
+        minutes: 65
+        title: 跑 tokenizer 全部相关测试
+        task: 正确性与性能分别记录；检查中文、空白、重复数据和 special tokens。
+        done: 保存命令、耗时、通过/失败数；所有要求通过后才标该部分实践完成。
+        sources:
+          - a1
+      - id: tokenizer-exp
+        kind: code
+        minutes: 30
+        title: 做一次小语料实验
+        task: 选择可公开且足够小的语料，训练一个小词表，记录语料大小、词表大小和编码长度。
+        done: 保留配置、词表/merges 的本地路径与一段样本，不要求官方满规模实验。
+        sources:
+          - handout
+      - id: algorithm
+        kind: algorithm
+        minutes: 25
+        title: 序列与迭代器
+        task: 比较 list 和 generator 逐项读取，观察它们是否一次持有全部元素。
+        done: 能说明内存上的差异，并构造一个只消费前几项的例子。
+        sources:
+          - python
+      - id: output
+        kind: output
+        minutes: 15
+        title: 写 tokenizer 检查结果
+        task: 发已通过、仍失败、缩小了哪些规模，以及下一步。
+        done: 把本周产物明确写作 A1 tokenizer 部分，不写成 A1 已完成。
+        sources: []
+    question:
+      prompt: 为什么逐块读取文本时，需要专门检查跨块边界，而不能默认逐块编码后拼起来就总是正确？
+      sources:
+        - handout
+  - date: '2026-09-18'
+    week: cs336
+    title: CS336 L3 + 模型入口 / 半马前收口
+    outcome: 学到 L3，保存可恢复的作业状态，安心进入休息期。
+    minutes: 300
+    blocks:
+      - id: cs3-watch
+        kind: watch
+        minutes: 95
+        title: 看 L3 · 架构与超参数
+        task: 跟讲义了解模型组件的设计取舍；把 Karpathy GPT 与 A1 要求的差异记成列表。
+        done: 至少能说明一个组件为什么这样设计；未理解的内容只标学习中。
+        sources:
+          - videos
+          - cs3
+          - cs3video
+      - id: model-read
+        kind: read
+        minutes: 35
+        title: 拆出 A1 模型实现顺序
+        task: 阅读模型部分，从 Linear / Embedding / RMSNorm 到 attention 与完整 block 排顺序。
+        done: 为各组件标注输入输出 shape 和对应测试入口。
+        sources:
+          - handout
+      - id: model-start
+        kind: code
+        minutes: 100
+        title: 开始模型组件，或优先收口 tokenizer
+        task: tokenizer 达标后自己实现一到两个基础组件并跑相关测试；若仍有失败，把这段时间全部用于修 tokenizer。
+        done: 产物可以是已测的模型组件，也可以是修正后的 tokenizer；如实写范围。
+        sources:
+          - handout
+          - a1
+      - id: save-state
+        kind: check
+        minutes: 30
+        title: 保存恢复点
+        task: 保存本地改动、运行命令、版本、测试现状和首个未完成动作；大文件与课程答案留在合适的本地或私有位置。
+        done: 9.30 能从记录直接恢复。休息期不布置任务，不累计逾期。
+        sources:
+          - a1
+      - id: algorithm
+        kind: algorithm
+        minutes: 25
+        title: 一题复习，轻量结束
+        task: 从本周数组、字典、迭代器中挑一个仍不熟的点做口述或小例子。
+        done: 知道自己下一次要补哪一个点即可。
+        sources:
+          - python
+      - id: output
+        kind: output
+        minutes: 15
+        title: 半马前的小结
+        task: 发 L1–L3 学习情况、A1 完成范围和恢复点，我来整理。
+        done: 记录真实成果；9.19–29 不补学习债。
+        sources: []
+    question:
+      prompt: 对比熟悉的 GPT block 和 A1 要求，归一化层放在哪里，它会影响哪条信息或梯度路径？
+      sources:
+        - cs3
+        - handout
+hardware: 小鱼已确认手边有一张 A100 可用；显存容量、环境与数据条件尚待实测。先跑小配置与单卡短训练，再决定 124M 的 batch / sequence length，不默认两机互联可用。
+curriculum:
+  - id: a1
+    title: Basics · 把语言模型完整搭起来
+    lectures: L1–L4 · tokenization / PyTorch / architecture / attention
+    period: 9.14–10.08
+    budget: 约 55–70 小时主线预算
+    summary: 下周主要完成 tokenizer。9.30 恢复后补 L4，继续模型、优化器和训练；争取国庆收口 A1。
+    steps:
+      - 下周：版本与环境 → byte/BPE trainer → encode/decode/iterable → tokenizer 正确性与性能测试。
+      - 9.30–10.02：看 L4（预算 95 分钟），实现并测试 embedding、normalization、position、attention 与 block；以固定 handout 为准。
+      - 10.03–10.05：实现数值稳定的 loss、optimizer、学习率计划、梯度裁剪、数据加载与 checkpoint；小 batch overfit。
+      - 10.06–10.08：A100 小规模训练与采样，检查完整测试，记录配置、曲线和官方规模差异。
+    finish: 核心组件与训练入口可测；有本人实现、训练曲线、采样、参数与显存估算，能解释一个失败案例。tokenizer 完成只是其中一部分。
+    url: https://github.com/stanford-cs336/assignment1-basics
+  - id: a2
+    title: Systems · 找瓶颈，再做优化
+    lectures: L5–L8、L10 · GPU / kernels / parallelism / inference
+    period: 10.09–10.25
+    budget: 约 45–60 小时主线预算
+    summary: 从 A1 的实测基线出发，逐项改变实现并比较。单张 A100 可先做大部分单卡测量；跨机结果另记条件。
+    steps:
+      - 五讲各先留 95 分钟，边看边画 GPU 内存与计算路径；L10 为 inference 补充。
+      - 给 A1 增加稳定的 benchmark 和 profiling，记录 warmup、同步、重复测量及峰值显存。
+      - 按 handout 完成 Triton attention 与正确性检查，比较不同长度下的误差、速度、显存。
+      - 实现作业要求的并行/内存优化；只有第二台机器与网络实测可用才开展跨机实验。
+    finish: 至少一组优化前后可复现对照，包含正确性、测量方法、不同输入规模与适用范围；未做的多卡项明确列出。
+    url: https://github.com/stanford-cs336/assignment2-systems
+  - id: a3
+    title: Scaling · 用实验分配算力
+    lectures: L9、L11 · scaling laws
+    period: 10.26–11.08
+    budget: 约 25–35 小时主线预算
+    summary: 先掌握实验设计与拟合，再讨论放大后的趋势。官方训练 API 是否能用，需要开始时确认。
+    steps:
+      - 两讲各留 95 分钟，写清模型参数、数据量、训练计算量和 loss 的关系。
+      - 核对 handout 的实验/API 要求，确定可用预算与一组模型/数据规模；保留未参与拟合的验证点。
+      - 跑受控 sweep，统一数据、随机种子与停止规则；资源不支持官方 API 时记录替代方案。
+      - 拟合曲线并用未参与拟合的点验证，报告误差与外推范围。
+    finish: 实验表、拟合代码、曲线与预测误差齐全；本地小规模替代实验和官方 API 要求分开记录。
+    url: https://github.com/stanford-cs336/assignment3-scaling
+  - id: a4
+    title: Data · 从原始文本到训练语料
+    lectures: L12–L14 · evaluation / sources / filtering
+    period: 11.09–11.22
+    budget: 约 45–60 小时主线预算
+    summary: 这里的 evaluation 是课程中的模型和数据评估；近期暂缓的 RAG 项目不会插入本阶段。
+    steps:
+      - 三讲各留 95 分钟，先确定比较不同数据处理方案的指标与固定训练预算。
+      - 用少量公开语料搭起抽取、语言与质量过滤、去重、tokenization 的完整链路。
+      - 逐步加入过滤/去重规则，记录每一步保留率、示例与处理耗时。
+      - 在同一训练配置下比较数据方案，报告数据规模、污染检查、验证结果与算力缩放差异。
+    finish: 完整 pipeline 可复现，至少一组受控数据对照；保留率、训练配置和模型结果能对应起来。
+    url: https://github.com/stanford-cs336/assignment4-data
+  - id: a5
+    title: Alignment · 从 SFT 到 reasoning RL
+    lectures: L15–L17 · post-training / RLVR / multimodality
+    period: 11.23–12.06
+    budget: 约 45–65 小时主线预算
+    summary: 先建立可评测的 SFT 基线，再做 reasoning RL。模型大小按 A100 实测选择，DPO 为可选扩展。
+    steps:
+      - 三讲各留 95 分钟，分清数据、监督信号、采样和奖励在训练中的位置。
+      - 核对 handout，选适合显存的小模型与数据子集；先建立固定评测集和 SFT 基线。
+      - 实现规定的 reasoning RL 训练部分，检查 reward、有效回答率、训练稳定性与评测变化。
+      - 对照 SFT 与 RL 的结果，分析失败样本，整理五个作业的证据；有余力再选 DPO 扩展。
+    finish: SFT/RL 对照、训练与评测配置、奖励检查、失败样本和规模差异齐全；不能只报告最好一次分数。
+    url: https://github.com/stanford-cs336/assignment5-alignment
+  - id: guests
+    title: Guest lectures · 课程视野补全
+    lectures: L18–L19 · Daniel Selsam / Dan Fu
+    period: 课程收口时
+    budget: 两讲各先留 95 分钟
+    summary: 为课程完整性保留入口。开始时检查公开视频或材料的可用情况，缺失资源如实登记。
+    steps:
+      - 从 Spring 2026 官网核对两场 guest lecture 对应的公开材料。
+      - 每次看完，只记录一个值得追问的问题和一个与已做作业的连接。
+    finish: 可获取的课程材料已学习并有自己的简短解释；未公开或尚不可访问的录像不标完成。
+    url: https://cs336.stanford.edu/

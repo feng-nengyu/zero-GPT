@@ -1,4 +1,4 @@
-# Feng Nengyu · Learning Lab
+# 小鱼 · Learning Lab
 
 The public learning site is generated from Markdown, YAML, existing notes, and verified learning evidence.
 
@@ -31,3 +31,5 @@ Updates normally arrive through conversation: edit the appropriate Markdown/YAML
 The break dates and current three goals are checked for consistency at build time. Keep `state.yml`, the latest daily entry and `roadmap.yml` aligned; preserve historical logs. See the project skill's content schema for fields.
 
 The build normalizes nested Next.js segment filenames emitted on Windows to the flat URLs the browser expects. Linux exports are already flat. A regression test covers dynamic-route payloads; the normalizer only copies generated artifacts inside out/.
+
+每日详细清单保存在 content/study-plan.yml：按日期、时间预算、课程链接、动手与检查编排。未来清单不生成学习日志；本机勾选不更新公开进度。CS336 五个作业的可展开路线也来自此文件。

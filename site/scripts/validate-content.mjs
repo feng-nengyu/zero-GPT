@@ -1,3 +1,4 @@
+import { validateStudyPlan } from "./study-plan-validation.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
@@ -274,6 +275,13 @@ if (!fs.existsSync(currentDaily)) {
     errors.push("state.yml: today's goals must match the current daily entry");
   }
 }
+
+const studyPlan = readYaml(path.join(contentRoot, "study-plan.yml"));
+errors.push(...validateStudyPlan(studyPlan, state));
+scanSecrets(
+  "study-plan.yml",
+  fs.readFileSync(path.join(contentRoot, "study-plan.yml"), "utf8"),
+);
 
 if (errors.length) {
   console.error("Learning Lab content validation failed:\n");

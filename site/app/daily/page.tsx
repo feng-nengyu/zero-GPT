@@ -1,24 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllContent, getCurrentState } from "@/lib/content";
-import { FocusBoard } from "@/components/focus-board";
-import { QuestionCard } from "@/components/question-card";
+import { getAllContent, getCurrentState, getStudyPlan } from "@/lib/content";
+import { StudyPlanner } from "@/components/study-planner";
 import { formatDate } from "@/lib/format";
 export const metadata: Metadata = { title: "每日待办" };
 export default function DailyPage() {
   const state = getCurrentState(),
     entries = getAllContent("daily");
   return (
-    <div className="shell page-shell">
+    <div className="shell page-shell daily-shell">
       <header className="page-intro">
-        <p className="eyebrow">ONE DAY AT A TIME</p>
-        <h1>今天，从一小步开始。</h1>
-        <p>主线学习、一点算法、留下自己的记录。国庆前，专心把基础学扎实。</p>
+        <p className="eyebrow">LITTLE STEPS, REAL PROGRESS</p>
+        <h1>小鱼，今天这样学。</h1>
+        <p>看哪节、学多久、接着做什么，都放在这里。选一天，按顺序开始。</p>
       </header>
-      <div className="daily-board">
-        <FocusBoard state={state} />
-      </div>
-      <QuestionCard question={state.question} />
+      <StudyPlanner plan={getStudyPlan()} state={state} />
       <section className="daily-history">
         <div className="section-top">
           <h2>走过的日子</h2>

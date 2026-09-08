@@ -34,7 +34,7 @@ export default function HomePage() {
             <span>世界就大一点。</span>
           </h1>
           <p>
-            我是 Nengyu。在这里学大模型、做实验，
+            我是小鱼。在这里学大模型、做实验，
             <br className="desktop-break" />
             也收集那些让人忍不住说「原来如此」的瞬间。
           </p>
@@ -145,15 +145,15 @@ export default function HomePage() {
             ))}
         </div>
       </section>
-      <Link className="roadmap-ribbon" href="/roadmap">
+      <Link className="roadmap-ribbon" href="/daily">
         <span className="ribbon-icon">
           <LabIcon name="roadmap" size={24} />
         </span>
         <div>
-          <strong>半马前，争取走进 CS336。</strong>
-          <p>L5 → L6 → Build GPT → CS336 L1 / A1 切片</p>
+          <strong>本周收尾 Karpathy，下周进入 CS336。</strong>
+          <p>每日时间、课程链接、动手任务与检查标准，都已经排好。</p>
         </div>
-        <span>看看地图 ↗</span>
+        <span>打开学习清单 ↗</span>
       </Link>
     </div>
   );

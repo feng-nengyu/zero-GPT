@@ -1,7 +1,7 @@
 ---
 title: Stanford CS336 · 自学执行地图
 date: 2026-09-08
-summary: 半马前切入 L1 与 tokenizer 小实现，国庆推进 A1，按依赖紧凑完成五个作业的自学版本。
+summary: 下周 L1–L3 与 A1 tokenizer 逐日清单，国庆争取收口 A1，完整串起 19 讲与五个作业。
 track: cs336
 tags: [cs336, language-modeling, systems, scaling, data, alignment]
 status: planned
@@ -13,9 +13,9 @@ evidence:
 
 ## 当前执行策略（2026-09-08 更新）
 
-希望尽早完成 Karpathy 与 CS336，半马前就做完 CS336 的一部分。现在按知识依赖衔接两门课：先完成 L5 校准、Lecture 6 和 Build GPT 的关键代码，再切入 CS336 L1 与 A1 tokenizer 切片。GPT-2 124M 完整复现不再作为 tokenizer 部分的前置条件。
+本周（9.8–9.13）收完剩余 Karpathy 课程并做最小实践；下周（9.14–9.18）把主要时间交给 CS336。目标是学习 L1–L3，完成 A1 tokenizer 的实现与相关测试，有余力开始模型组件。每天具体的看课时间、参考链接、动手任务和完成标准已经放在[每日待办](https://feng-nengyu.github.io/zero-GPT/daily/#2026-09-14)。
 
-国庆前主要精力留给课程与必要基础，RAG 评测暂缓。暂定 9 月 19–29 日左右休息、9 月 30 日恢复，国庆在校学习。具体安排见[学习地图](https://feng-nengyu.github.io/zero-GPT/roadmap/)。
+已确认手边有一张 A100 可用；显存容量、环境、吞吐与第二台机器条件尚未实测。国庆前专心课程，RAG 评测暂缓。9.19–9.29 左右休息，暂定 9.30 恢复，国庆在校继续推进 A1。
 
 本地图核对的是 [Stanford CS336 Spring 2026 官方主页](https://cs336.stanford.edu/)。课程共有 19 讲，覆盖 tokenization、architecture、GPU/Triton、parallelism、scaling、inference、evaluation、data、post-training 与 multimodality。
 
@@ -45,8 +45,8 @@ Karpathy 的 Tokenizer 与 A1 的 tokenizer 概念可以相互衔接，但作业
 
 官方 A4 最终训练配置使用 8 张 B200，A3 的学生训练 API 也不是校外自学者可以默认依赖的资源。因此“完成作业”采用 fidelity-preserving scale-down：缩小模型、数据和训练步数，但保留完整 pipeline、变量控制、评测与结果解释。
 
-- 默认先在一张 A100 上完成 correctness、profiling 与可复现实验。
-- 第二张 A100 位于另一台机器；只有网络、NCCL 与拓扑实测通过后，才把 multi-node 当作可用能力。
+- 已确认手边有一张 A100，先实测环境与显存，再完成 correctness、profiling 与可复现实验。
+- 另一台预期各配一张 A100 的机器仍待确认；只有网络、NCCL 与拓扑实测通过后，才把 multi-node 当作可用能力。
 - A2 的重点是测量、瓶颈解释与优化前后对比，不以追逐官方 leaderboard 为目标。
 - A3 若无法使用官方 API，就运行本地小规模 sweep，并明确外推边界。
 - A4 保留 WET → filter → deduplicate → tokenize → train → evaluate 的完整链路，缩小文件数与训练预算。
@@ -70,24 +70,46 @@ Karpathy 的 Tokenizer 与 A1 的 tokenizer 概念可以相互衔接，但作业
 
 Spring 2026 官方主页当前链接上述五个仓库；其中 A1 README 标题仍保留 Spring 2025，说明仓库标签并不完全统一。正式开始每个作业时应记录当日 commit SHA，并以同一 offering 的 handout、tests 与 lectures 为一组，避免跨版本混用。2026-09-08 已重新核对课程主页与 A1 README；正式进入时再审计讲义、录像及测试，并记录固定 commit SHA。本次尚未冻结版本。
 
-## 紧凑节奏与校准
+## 两周内，具体怎样推进
 
-以下是根据每天 5 小时作出的进取预算，不是官方工时，也不是已完成记录：
+下列都是学习预算，包含暂停与笔记，不是视频净时长，更不是已经完成的工时。完整学习日总计 5 小时，其中主线 4 小时 20 分钟、算法 25 分钟、记录 15 分钟；每天另外留 1 小时锻炼。周日用 2 小时收尾。
 
-| 时间 | 目标 | 可核验产物 |
-|---|---|---|
-| 9.8–9.10 | L5 校准、Lecture 6 | 本人概念解释、初始化实验解读、关键 tensor shape |
-| 9.11、9.14–9.15 | Build GPT | 可运行的小模型、causal mask 和 shape 检查、训练与采样 |
-| 9.16–9.18 | CS336 L1 与 A1 tokenizer 切片 | 固定版本记录、本人基础 encode/decode、含中文的 roundtrip 测试 |
-| 9.19–9.29 左右 | 半马与休息 | 不排任务、不积累学习债务，暂按 9.30 恢复 |
-| 9.30–10.18 | A1、Tokenizer、State of GPT 与 GPT-2 124M | 模型与训练测试、小规模训练报告、复现规模差异 |
-| 10.19–11.08 | A2 / A3 与对应课程 | profiling 与优化对比、scaling 实验和外推限制 |
-| 11.09–12.06 | A4 / A5 与课程收口 | 数据 pipeline、对齐实验、可复现记录 |
+| 日期 | 课程与主线时间 | 看完接着做 | 当天要留下什么 |
+|---|---|---|---|
+| 9.8 | L5 检查 40m，L6 70m，编码 110m，检查 40m | 写出上下文分组，运行前后向与短训练 | 自己的梯度解释、shape 与运行结果 |
+| 9.9 | Build GPT 140m，编码 90m，检查 30m | 接通 attention、block、训练和采样 | mask / shape 检查，loss 与生成样本 |
+| 9.10 | Tokenizer 150m，编码 90m，检查 20m | 做小 BPE，验证中文与 emoji 往返 | 基础 encode/decode、边界与失败例子 |
+| 9.11 | GPT-2 前半程 135m，编码 100m，配置检查 25m | 跑通模型，检查 A100 环境与显存 | 参数量、配置、一个训练 step |
+| 9.12 | GPT-2 后半程 140m，State of GPT 50m，短训练 50m，检查 20m | 单卡短训练并记录指标 | loss、峰值显存、tokens/s、采样 |
+| 9.13 | 回忆 30m，修一个缺口 55m，下周预览 15m | 用自己代码收尾，周一进入 CS336 | 实际课程/实践状态与一个待补点 |
+| 9.14 | 版本/环境 35m，L1 95m，handout 40m，编码 90m | 固定版本，写 byte 词表与 decode 骨架 | SHA、环境、bytes roundtrip |
+| 9.15 | 阅读 35m，编码 170m，测试 55m | BPE trainer、边界与确定性 | 手算对照、trainer 测试结果 |
+| 9.16 | L2 95m，编码 125m，检查 40m | encode/decode 与 special tokens | 资源估算、编码路径测试 |
+| 9.17 | 阅读 30m，编码 135m，测试 65m，小实验 30m | iterable、完整 tokenizer 检查与小语料 | 通过/失败范围、耗时与配置 |
+| 9.18 | L3 95m，阅读 35m，编码 100m，保存恢复点 30m | tokenizer 达标后进入基础模型组件 | 半马前成果与 9.30 恢复入口 |
 
-半马前必须做小：L1 与 tokenizer 的可验证切片优先，BPE trainer 和完整 tokenizer 测试作为冲刺。若 Build GPT 超时，就缩小首个切片，完整 BPE 放到国庆；不挤占休息期。
+CS336 录像从[官方课程页链接的列表](https://www.youtube.com/watch?list=PLoROMvodv4rMqXOcazWaTUHhq-yembLCV&v=JuoVZkPBiKk)进入。每讲先留 95 分钟；录像实际年份、长度与讲义差异在 9.14 核对，不能把官网链接的旧录像直接称为 2026 新录像。
 
-9.8–18 按 9 个工作日共 45 小时估算，其中约 39 小时主线、3.75 小时算法、2.25 小时记录。如果 9.8 当天已无完整学习时间，首个检查点按剩余工时调整。国庆后每周根据 A1 实际工时校准；12 月上旬是进取目标，算力不足或实现耗时更长时如实调整，绝不靠缩减学习证据宣布完成。
+- L1 配套：[Overview / tokenization 讲义](https://cs336.stanford.edu/lectures/?trace=lecture_01)，重点连接 A1 tokenizer 的要求。
+- L2 配套：[PyTorch / resource accounting 讲义](https://cs336.stanford.edu/lectures/?trace=lecture_02)，看完做 tensor shape、FLOPs 与内存估算。
+- L3 配套：[Architectures / hyperparameters 讲义](https://github.com/stanford-cs336/lectures/blob/main/lecture_03.pdf)，看完按 handout 拆模型组件。
+- A1 配套：[官方 handout](https://github.com/stanford-cs336/assignment1-basics/blob/main/cs336_assignment1_basics.pdf)，实现要求与测试以正式固定的版本为准。
+
+## 19 讲与五个作业的后续衔接
+
+| 自学阶段 | 课程范围 | 实现与实验重点 | 进取时间目标 |
+|---|---|---|---|
+| A1 Basics | L1–L4 | tokenizer → 模型组件 → optimizer / loss → 训练与 checkpoint → 单卡实验 | 9.14–10.08，扣除休息期 |
+| A2 Systems | L5–L8、L10 | 稳定测量 → profiling → Triton attention → 并行和显存优化 | 10.09–10.25 |
+| A3 Scaling | L9、L11 | 预算设计 → 受控 sweep → 拟合 → 留出点验证与外推分析 | 10.26–11.08 |
+| A4 Data | L12–L14 | 抽取 → 过滤 → 去重 → tokenization → 统一训练预算的对照 | 11.09–11.22 |
+| A5 Alignment | L15–L17 | 固定评测 → SFT 基线 → reasoning RL → 结果与失败样本分析 | 11.23–12.06 |
+| Guest lectures | L18–L19 | 核对公开材料，每讲留一个与作业相关的问题 | 课程收口时补全 |
+
+展开[学习地图中的每个作业](https://feng-nengyu.github.io/zero-GPT/roadmap/)，可以看到顺序、预计工时、完成标准与官方入口。A1 国庆收口、12 月上旬完成五个作业的自学版本是进取目标；按真实实现耗时每周调整。不可获取的录像、多卡实验或官方 API 项目单独登记，不虚构全部完成。
+
+下周优先保住 tokenizer 的正确实现和测试，模型部分可放到国庆。视频看完、最小实践完成、已掌握以及官方满规模要求分别记录；超时就缩小当日动作，休息期没有学习债。
 
 ## 当前状态
 
-本次仅调整学习计划与资料入口。CS336 仍未开始，未完成版本冻结、课程学习或任何作业验收。
+本次调整学习计划、资料入口，并记录一张 A100 已可用。CS336 仍未开始，未完成版本冻结、课程学习或任何作业验收。

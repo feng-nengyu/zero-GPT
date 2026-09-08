@@ -21,7 +21,7 @@ export function SiteHeader() {
           <LabIcon name="leaf" size={25} />
         </span>
         <span className="brand-copy">
-          <strong>Nengyu’s Lab</strong>
+          <strong>小鱼的 Lab</strong>
           <small>A little, every day.</small>
         </span>
       </Link>
@@ -62,7 +62,7 @@ export function SiteHeader() {
           rel="noreferrer"
           className="github-link"
         >
-          GitHub ↗ <span>Feng Nengyu</span>
+          GitHub ↗ <span>小鱼</span>
         </a>
       </div>
     </header>
